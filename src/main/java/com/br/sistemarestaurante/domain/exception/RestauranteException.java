@@ -1,4 +1,4 @@
-package com.br.sistemarestaurante.exception;
+package com.br.sistemarestaurante.domain.exception;
 
 public class RestauranteException extends RuntimeException{
     public RestauranteException(String message) {

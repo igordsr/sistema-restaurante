@@ -28,7 +28,8 @@ public class RestauranteRepositoryImpl implements IRegistrarRestaurante {
         restauranteTable.setNome(restauranteDomain.getNome());
         restauranteTable.setLocalizacao(restauranteDomain.getLocalizacao());
         restauranteTable.setTipoCozinha(restauranteDomain.getTipoCozinha());
-        restauranteTable.setHorariosFuncionamento(restauranteDomain.getHorariosFuncionamento());
+        restauranteTable.setHorarioAbertura(restauranteDomain.getHorarioAbertura());
+        restauranteTable.setHorarioFechamento(restauranteDomain.getHorarioFechamento());
         restauranteTable.setCapacidade(restauranteDomain.getCapacidade());
         return restauranteTable;
     }

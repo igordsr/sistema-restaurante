@@ -5,9 +5,9 @@ import com.br.sistemarestaurante.domain.entity.Restaurante;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
-
 @Data
 @Entity
 @Table(name = "restaurantes")
@@ -27,22 +27,19 @@ public class RestauranteTable implements IConverterToDomainEntity<Restaurante> {
     private String tipoCozinha;
 
     @Column(nullable = false)
-    private String horariosFuncionamento;
+    private LocalTime horarioAbertura;
+
+    @Column(nullable = false)
+    private LocalTime horarioFechamento;
 
     @Column(nullable = false)
     private int capacidade;
 
     @OneToMany(mappedBy = "restaurante")
-    private List<Reserva> reservas;
+    private List<ReservaTable> reservaTables;
 
     @Override
     public Restaurante ToDomainEntity() {
-        return Restaurante.builder()
-                .identificador(this.id)
-                .nome(this.nome)
-                .localizacao(this.localizacao)
-                .tipoCozinha(this.tipoCozinha)
-                .horariosFuncionamento(this.horariosFuncionamento)
-                .capacidade(this.capacidade).build();
+        return new Restaurante(id, nome, localizacao, tipoCozinha, horarioAbertura, horarioFechamento, capacidade);
     }
 }

@@ -3,23 +3,26 @@ package com.br.sistemarestaurante.infrastructure.persistence.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
 @Entity
-public class Avaliacao {
+public class ClienteTable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
     private UUID id;
 
-    @OneToOne
-    @JoinColumn(name = "reserva_id")
-    private Reserva reserva;
+    @Column(nullable = false)
+    private String nome;
 
     @Column(nullable = false)
-    private String comentario;
+    private String email;
 
     @Column(nullable = false)
-    private int classificacao;
+    private String telefone;
+
+    @OneToMany(mappedBy = "clienteTable")
+    private List<ReservaTable> reservaTables;
 }

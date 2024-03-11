@@ -31,7 +31,8 @@ public class RestauranteGateway implements IConverterToDTO<RestauranteDTO, Resta
                 restaurante.getNome(),
                 restaurante.getLocalizacao(),
                 restaurante.getTipoCozinha(),
-                restaurante.getHorariosFuncionamento(),
+                restaurante.getHorarioAbertura(),
+                restaurante.getHorarioFechamento(),
                 restaurante.getCapacidade());
     }
 }

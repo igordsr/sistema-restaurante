@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-public class Reserva {
+public class ReservaTable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
@@ -20,7 +20,7 @@ public class Reserva {
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+    private ClienteTable clienteTable;
 
     @Column(nullable = false)
     private Date data;
@@ -30,6 +30,6 @@ public class Reserva {
 
     private String status;
 
-    @OneToOne(mappedBy = "reserva")
-    private Avaliacao avaliacao;
+    @OneToOne(mappedBy = "reservaTable")
+    private AvaliacaoTable avaliacaoTable;
 }
