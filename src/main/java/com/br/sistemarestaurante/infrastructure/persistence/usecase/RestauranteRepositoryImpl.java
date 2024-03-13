@@ -1,5 +1,6 @@
 package com.br.sistemarestaurante.infrastructure.persistence.usecase;
 
+import com.br.sistemarestaurante.adapter.dto.RestauranteSearchDTO;
 import com.br.sistemarestaurante.domain.entity.Restaurante;
 import com.br.sistemarestaurante.domain.exception.RestauranteNotFoundException;
 import com.br.sistemarestaurante.infrastructure.persistence.domaincontracts.IRestauranteRepositoryDomainContract;
@@ -8,6 +9,7 @@ import com.br.sistemarestaurante.infrastructure.persistence.repository.IRestaura
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -34,6 +36,11 @@ public class RestauranteRepositoryImpl implements IRestauranteRepositoryDomainCo
     @Override
     public RestauranteTable findRestauranteTableById(UUID id) throws RestauranteNotFoundException {
         return this.repository.findById(id).orElseThrow(RestauranteNotFoundException::new);
+    }
+
+    @Override
+    public List<RestauranteTable> findByNomeOrLocalizacaoOrTipoCozinha(RestauranteSearchDTO restauranteSearchDTO) {
+        return this.repository.findByNomeContainingAndLocalizacaoContainingAndTipoCozinhaContaining(restauranteSearchDTO.nome(), restauranteSearchDTO.localizacao(), restauranteSearchDTO.tipoCozinha());
     }
 
     private RestauranteTable convertRestauranteDomainToRestauranteDataBaseEntity(Restaurante restauranteDomain) {

@@ -5,7 +5,7 @@ import com.br.sistemarestaurante.domain.entity.Reserva;
 import com.br.sistemarestaurante.domain.entity.Restaurante;
 import com.br.sistemarestaurante.domain.exception.RestauranteNotFoundException;
 import com.br.sistemarestaurante.domain.exception.SystemException;
-import com.br.sistemarestaurante.domain.servicecontracts.IBuscarRestauranteById;
+import com.br.sistemarestaurante.domain.servicecontracts.IBuscarRestaurante;
 import com.br.sistemarestaurante.domain.servicecontracts.IManterCliente;
 import com.br.sistemarestaurante.domain.servicecontracts.IRegistrarReserva;
 import com.br.sistemarestaurante.domain.usecase.contract.IReservaContract;
@@ -18,13 +18,13 @@ public class ReservaUseCase implements IReservaContract {
 
 
     @Override
-    public Reserva registarNoRepositorioDeDados(IRegistrarReserva iRegistrarReserva, IBuscarRestauranteById restaurantRepository, IManterCliente clienteRepositorio, Reserva reserva) {
+    public Reserva registarNoRepositorioDeDados(IRegistrarReserva iRegistrarReserva, IBuscarRestaurante restaurantRepository, IManterCliente clienteRepositorio, Reserva reserva) {
         final Reserva reservaValid = this.validate(iRegistrarReserva, restaurantRepository, clienteRepositorio, reserva);
         return iRegistrarReserva.resgistar(reservaValid);
     }
 
     @Override
-    public Reserva validate(IRegistrarReserva iRegistrarReserva, IBuscarRestauranteById restaurantRepository, IManterCliente clienteRepositorio, IAttributeValidatorRule<Reserva> reserva) throws SystemException {
+    public Reserva validate(IRegistrarReserva iRegistrarReserva, IBuscarRestaurante restaurantRepository, IManterCliente clienteRepositorio, IAttributeValidatorRule<Reserva> reserva) throws SystemException {
         if (Objects.isNull(reserva)) {
             throw new SystemException("[reserva] não pode ser nulo ou branco");
         }
