@@ -1,6 +1,6 @@
 package com.br.sistemarestaurante.adapter.controller.exception;
 
-import com.br.sistemarestaurante.domain.exception.RestauranteException;
+import com.br.sistemarestaurante.domain.exception.SystemException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -34,8 +34,8 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(code).body(validateError);
     }
 
-    @ExceptionHandler(RestauranteException.class)
-    public ResponseEntity<StardardError> InvalidBusinessRules(RestauranteException err, HttpServletRequest httpServletRequest) {
+    @ExceptionHandler(SystemException.class)
+    public ResponseEntity<StardardError> InvalidBusinessRules(SystemException err, HttpServletRequest httpServletRequest) {
         HttpStatus code = HttpStatus.BAD_REQUEST;
         stardardError.setTimestamp(Instant.now());
         stardardError.setStatus(code.value());

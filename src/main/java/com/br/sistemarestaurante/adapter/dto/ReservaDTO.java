@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.UUID;
 
@@ -35,8 +36,7 @@ public record ReservaDTO(
         Calendar data,
 
         @NotNull(message = "O Atributo [hora] da Reserva não pode estar em nulo.")
-        @NotBlank(message = "O Atributo [hora] do Reserva não pode estar em Branco.")
-        String hora,
+        LocalTime hora,
         @JsonInclude(JsonInclude.Include.NON_NULL)
         StatusReserva status
 

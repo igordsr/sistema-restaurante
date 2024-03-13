@@ -4,24 +4,29 @@ import com.br.sistemarestaurante.adapter.dto.ReservaDTO;
 import com.br.sistemarestaurante.adapter.util.IConverterToDTO;
 import com.br.sistemarestaurante.adapter.util.IConverterToDomainEntity;
 import com.br.sistemarestaurante.domain.entity.Reserva;
-import com.br.sistemarestaurante.domain.usecase.scenario.ReservaUseCaseImpl;
+import com.br.sistemarestaurante.domain.usecase.scenario.ReservaUseCase;
+import com.br.sistemarestaurante.infrastructure.persistence.usecase.ClienteRepositoryImpl;
 import com.br.sistemarestaurante.infrastructure.persistence.usecase.ReservaRepositoryImpl;
-import jakarta.validation.Valid;
+import com.br.sistemarestaurante.infrastructure.persistence.usecase.RestauranteRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ReservaGateway implements IConverterToDTO<ReservaDTO, Reserva> {
     private final ReservaRepositoryImpl repository;
+    private final ClienteRepositoryImpl clienteRepository;
+    private final RestauranteRepositoryImpl restauranteRepository;
 
     @Autowired
-    public ReservaGateway(ReservaRepositoryImpl reservaRepository) {
+    public ReservaGateway(ReservaRepositoryImpl reservaRepository, ClienteRepositoryImpl clienteRepository, RestauranteRepositoryImpl restauranteRepository) {
         this.repository = reservaRepository;
+        this.clienteRepository = clienteRepository;
+        this.restauranteRepository = restauranteRepository;
     }
 
     public ReservaDTO registrar(final IConverterToDomainEntity<Reserva> obj) {
         Reserva reserva = obj.ToDomainEntity();
-        reserva = new ReservaUseCaseImpl().registarNoRepositorioDeDados(this.repository, reserva);
+        reserva = new ReservaUseCase().registarNoRepositorioDeDados(this.repository, restauranteRepository, this.clienteRepository, reserva);
         return this.ToDTO(reserva);
     }
 

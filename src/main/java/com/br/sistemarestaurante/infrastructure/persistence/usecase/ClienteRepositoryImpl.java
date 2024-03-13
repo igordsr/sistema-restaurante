@@ -1,15 +1,18 @@
 package com.br.sistemarestaurante.infrastructure.persistence.usecase;
 
 import com.br.sistemarestaurante.domain.entity.Cliente;
+import com.br.sistemarestaurante.domain.exception.ClienteNotFoundException;
+import com.br.sistemarestaurante.infrastructure.persistence.domaincontracts.IClienteRepositoryDomainContract;
 import com.br.sistemarestaurante.infrastructure.persistence.entity.ClienteTable;
 import com.br.sistemarestaurante.infrastructure.persistence.repository.IClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
-public class ClienteRepositoryImpl {
+public class ClienteRepositoryImpl implements IClienteRepositoryDomainContract {
     private IClienteRepository iClienteRepository;
 
     @Autowired
@@ -17,22 +20,21 @@ public class ClienteRepositoryImpl {
         this.iClienteRepository = iClienteRepository;
     }
 
-    public ClienteTable findCliente(Cliente cliente) {
-        ClienteTable clienteTable = null;
-        Optional<ClienteTable> foundCliente = this.iClienteRepository.findByEmail(cliente.getEmail());
-
-        if (foundCliente.isEmpty()) {
-            foundCliente = Optional.of(this.saveCliente(cliente));
-        }
-
-        clienteTable = foundCliente.get();
-        return clienteTable;
+    @Override
+    public Optional<Cliente> findClienteByEmail(String email) {
+        final Optional<ClienteTable> foundCliente = this.iClienteRepository.findByEmail(email);
+        return foundCliente.map(ClienteTable::ToDomainEntity);
     }
 
-    private ClienteTable saveCliente(Cliente cliente) {
+    @Override
+    public Cliente resgistar(Cliente cliente) {
         ClienteTable clienteTable = this.convertClienteDomainToClienteDataBaseEntity(cliente);
+        return this.iClienteRepository.save(clienteTable).ToDomainEntity();
+    }
 
-        return this.iClienteRepository.save(clienteTable);
+    @Override
+    public ClienteTable findClienteById(UUID id) throws ClienteNotFoundException {
+        return this.iClienteRepository.findById(id).orElseThrow(ClienteNotFoundException::new);
     }
 
     private ClienteTable convertClienteDomainToClienteDataBaseEntity(Cliente clienteDomain) {
@@ -42,4 +44,6 @@ public class ClienteRepositoryImpl {
         clienteTable.setNome(clienteDomain.getNome());
         return clienteTable;
     }
+
+
 }

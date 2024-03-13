@@ -4,7 +4,7 @@ import com.br.sistemarestaurante.adapter.dto.RestauranteDTO;
 import com.br.sistemarestaurante.adapter.util.IConverterToDTO;
 import com.br.sistemarestaurante.adapter.util.IConverterToDomainEntity;
 import com.br.sistemarestaurante.domain.entity.Restaurante;
-import com.br.sistemarestaurante.domain.usecase.scenario.RestauranteUseCaseImpl;
+import com.br.sistemarestaurante.domain.usecase.scenario.RestauranteUseCase;
 import com.br.sistemarestaurante.infrastructure.persistence.usecase.RestauranteRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ public class RestauranteGateway implements IConverterToDTO<RestauranteDTO, Resta
 
     public RestauranteDTO registrar(final IConverterToDomainEntity<Restaurante> obj) {
         Restaurante restaurante = obj.ToDomainEntity();
-        restaurante = new RestauranteUseCaseImpl().registarNoRepositorioDeDados(this.repository, restaurante);
+        restaurante = new RestauranteUseCase().registarNoRepositorioDeDados(this.repository, restaurante);
         return this.ToDTO(restaurante);
     }
 
