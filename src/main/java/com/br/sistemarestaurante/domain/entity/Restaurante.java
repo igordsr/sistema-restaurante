@@ -1,14 +1,14 @@
 package com.br.sistemarestaurante.domain.entity;
 
-import com.br.sistemarestaurante.domain.exception.RestauranteException;
-import com.br.sistemarestaurante.domain.usecase.rule.IAttributeValidator;
+import com.br.sistemarestaurante.domain.exception.SystemException;
+import com.br.sistemarestaurante.domain.usecase.rule.IAttributeValidatorRule;
 
 import java.time.LocalTime;
 import java.util.Objects;
 import java.util.UUID;
 
 
-public final class Restaurante implements IAttributeValidator<Restaurante> {
+public final class Restaurante implements IAttributeValidatorRule<Restaurante> {
     private UUID identificador;
     private String nome;
     private String localizacao;
@@ -56,20 +56,20 @@ public final class Restaurante implements IAttributeValidator<Restaurante> {
     }
 
     @Override
-    public Restaurante validate() throws RestauranteException {
+    public Restaurante validate() throws SystemException {
         final String msgException = "[%s] não pode ser nulo ou branco";
         if (Objects.isNull(this.nome)) {
-            throw new RestauranteException(String.format(msgException, "nome"));
+            throw new SystemException(String.format(msgException, "nome"));
         } else if (Objects.isNull(this.localizacao)) {
-            throw new RestauranteException(String.format(msgException, "localização"));
+            throw new SystemException(String.format(msgException, "localização"));
         } else if (Objects.isNull(this.tipoCozinha)) {
-            throw new RestauranteException(String.format(msgException, "tipoCozinha"));
+            throw new SystemException(String.format(msgException, "tipoCozinha"));
         } else if (Objects.isNull(this.horarioAbertura)) {
-            throw new RestauranteException(String.format(msgException, "horarioAbertura"));
+            throw new SystemException(String.format(msgException, "horarioAbertura"));
         } else if (Objects.isNull(this.horarioFechamento)) {
-            throw new RestauranteException(String.format(msgException, "horarioFechamento"));
+            throw new SystemException(String.format(msgException, "horarioFechamento"));
         } else if (Objects.isNull(this.capacidade)) {
-            throw new RestauranteException(String.format(msgException, "capacidade"));
+            throw new SystemException(String.format(msgException, "capacidade"));
         }
         return this;
     }

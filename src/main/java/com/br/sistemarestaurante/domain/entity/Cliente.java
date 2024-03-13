@@ -1,13 +1,12 @@
 package com.br.sistemarestaurante.domain.entity;
 
-import com.br.sistemarestaurante.domain.exception.ClienteException;
-import com.br.sistemarestaurante.domain.exception.RestauranteException;
-import com.br.sistemarestaurante.domain.usecase.rule.IAttributeValidator;
+import com.br.sistemarestaurante.domain.exception.SystemException;
+import com.br.sistemarestaurante.domain.usecase.rule.IAttributeValidatorRule;
 
 import java.util.Objects;
 import java.util.UUID;
 
-public final class Cliente implements IAttributeValidator<Cliente> {
+public final class Cliente implements IAttributeValidatorRule<Cliente> {
     private UUID identificador;
     private String nome;
     private String email;
@@ -37,14 +36,14 @@ public final class Cliente implements IAttributeValidator<Cliente> {
     }
 
     @Override
-    public Cliente validate() throws ClienteException {
+    public Cliente validate() throws SystemException {
         final String msgException = "[%s] não pode ser nulo ou branco";
         if (Objects.isNull(this.nome)) {
-            throw new RestauranteException(String.format(msgException, "nome"));
+            throw new SystemException(String.format(msgException, "nome"));
         } else if (Objects.isNull(this.email)) {
-            throw new RestauranteException(String.format(msgException, "email"));
+            throw new SystemException(String.format(msgException, "email"));
         } else if (Objects.isNull(this.telefone)) {
-            throw new RestauranteException(String.format(msgException, "telefone"));
+            throw new SystemException(String.format(msgException, "telefone"));
         }
         return this;
     }

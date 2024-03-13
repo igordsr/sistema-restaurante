@@ -6,6 +6,7 @@ import com.br.sistemarestaurante.domain.entity.StatusReserva;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.UUID;
 
@@ -27,10 +28,11 @@ public class ReservaTable implements IConverterToDomainEntity<Reserva> {
     private ClienteTable clienteTable;
 
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Calendar data;
 
     @Column(nullable = false)
-    private String hora;
+    private LocalTime hora;
 
     @Enumerated(EnumType.STRING)
     private StatusReserva status = StatusReserva.RESERVADO;

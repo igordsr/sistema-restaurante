@@ -1,14 +1,14 @@
 package com.br.sistemarestaurante.domain.usecase.scenario;
 
 import com.br.sistemarestaurante.domain.entity.Restaurante;
-import com.br.sistemarestaurante.domain.exception.RestauranteException;
+import com.br.sistemarestaurante.domain.exception.SystemException;
 import com.br.sistemarestaurante.domain.servicecontracts.IRegistrarRestaurante;
-import com.br.sistemarestaurante.domain.usecase.contract.IRestauranteUseCase;
-import com.br.sistemarestaurante.domain.usecase.rule.IAttributeValidator;
+import com.br.sistemarestaurante.domain.usecase.contract.IRestauranteContract;
+import com.br.sistemarestaurante.domain.usecase.rule.IAttributeValidatorRule;
 
 import java.util.Objects;
 
-public class RestauranteUseCaseImpl implements IRestauranteUseCase {
+public class RestauranteUseCase implements IRestauranteContract {
 
     @Override
     public Restaurante registarNoRepositorioDeDados(IRegistrarRestaurante iRegistrarRestaurante, Restaurante restaurante) {
@@ -16,9 +16,9 @@ public class RestauranteUseCaseImpl implements IRestauranteUseCase {
     }
 
     @Override
-    public Restaurante validate(IAttributeValidator<Restaurante> restaurante) throws RestauranteException {
+    public Restaurante validate(IAttributeValidatorRule<Restaurante> restaurante) throws SystemException {
         if (Objects.isNull(restaurante)) {
-            throw new RestauranteException("[restaurante] não pode ser nulo ou branco");
+            throw new SystemException("[restaurante] não pode ser nulo ou branco");
         }
         return restaurante.validate();
     }
