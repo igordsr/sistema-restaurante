@@ -1,14 +1,18 @@
 package com.br.sistemarestaurante.infrastructure.persistence.entity;
 
+import com.br.sistemarestaurante.adapter.util.IConverterToDomainEntity;
+import com.br.sistemarestaurante.domain.entity.Reserva;
+import com.br.sistemarestaurante.domain.entity.StatusReserva;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.UUID;
 
 @Data
 @Entity
-public class ReservaTable {
+@Table(name = "reservas")
+public class ReservaTable implements IConverterToDomainEntity<Reserva> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
@@ -23,13 +27,19 @@ public class ReservaTable {
     private ClienteTable clienteTable;
 
     @Column(nullable = false)
-    private Date data;
+    private Calendar data;
 
     @Column(nullable = false)
     private String hora;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private StatusReserva status = StatusReserva.RESERVADO;
 
     @OneToOne(mappedBy = "reservaTable")
     private AvaliacaoTable avaliacaoTable;
+
+    @Override
+    public Reserva ToDomainEntity() {
+        return new Reserva(id, restaurante.getId(), clienteTable.ToDomainEntity(), data, hora);
+    }
 }
