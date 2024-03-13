@@ -1,5 +1,7 @@
 package com.br.sistemarestaurante.infrastructure.persistence.entity;
 
+import com.br.sistemarestaurante.adapter.util.IConverterToDomainEntity;
+import com.br.sistemarestaurante.domain.entity.Cliente;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -8,7 +10,8 @@ import java.util.UUID;
 
 @Data
 @Entity
-public class ClienteTable {
+@Table(name = "clientes")
+public class ClienteTable implements IConverterToDomainEntity<Cliente> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
@@ -25,4 +28,10 @@ public class ClienteTable {
 
     @OneToMany(mappedBy = "clienteTable")
     private List<ReservaTable> reservaTables;
+
+    @Override
+    public Cliente ToDomainEntity() {
+        return new Cliente(id, nome, email, telefone);
+    }
+
 }
