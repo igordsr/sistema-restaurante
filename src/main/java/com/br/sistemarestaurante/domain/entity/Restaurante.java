@@ -27,6 +27,12 @@ public final class Restaurante implements IAttributeValidatorRule<Restaurante> {
         this.capacidade = capacidade;
     }
 
+    public Restaurante(String nome, String localizacao, String tipoCozinha) {
+        this.nome = nome;
+        this.localizacao = localizacao;
+        this.tipoCozinha = tipoCozinha;
+    }
+
     public UUID getIdentificador() {
         return identificador;
     }

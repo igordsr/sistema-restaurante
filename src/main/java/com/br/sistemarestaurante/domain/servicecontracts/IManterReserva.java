@@ -1,5 +1,5 @@
 package com.br.sistemarestaurante.domain.servicecontracts;
 
-public interface IManterReserva extends IRegistrarReserva, IListarReservasRestaurantePeloStatusReserva {
+public interface IManterReserva extends IRegistrarReserva, IListarReservasRestaurantePeloStatusReserva, IReservaAlterarStatus {
 
 }

@@ -3,6 +3,7 @@ package com.br.sistemarestaurante.infrastructure.persistence.usecase;
 import com.br.sistemarestaurante.domain.entity.Reserva;
 import com.br.sistemarestaurante.domain.entity.Restaurante;
 import com.br.sistemarestaurante.domain.entity.StatusReserva;
+import com.br.sistemarestaurante.domain.exception.ReservaNotFoundException;
 import com.br.sistemarestaurante.infrastructure.persistence.domaincontracts.IReservaRepositoryDomainContract;
 import com.br.sistemarestaurante.infrastructure.persistence.entity.ClienteTable;
 import com.br.sistemarestaurante.infrastructure.persistence.entity.ReservaTable;
@@ -56,5 +57,12 @@ public class ReservaRepositoryImpl implements IReservaRepositoryDomainContract {
                 .stream()
                 .map(ReservaTable::ToDomainEntity)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Reserva reservaAterarStatus(Reserva reserva) {
+        ReservaTable reservaTable = this.repository.findById(reserva.getIdentificador()).orElseThrow(ReservaNotFoundException::new);
+        reservaTable.setStatus(reserva.getStatus());
+        return this.repository.save(reservaTable).ToDomainEntity();
     }
 }

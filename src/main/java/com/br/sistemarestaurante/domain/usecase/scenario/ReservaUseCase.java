@@ -10,6 +10,7 @@ import com.br.sistemarestaurante.domain.exception.SystemException;
 import com.br.sistemarestaurante.domain.servicecontracts.IBuscarRestaurante;
 import com.br.sistemarestaurante.domain.servicecontracts.IManterCliente;
 import com.br.sistemarestaurante.domain.servicecontracts.IManterReserva;
+import com.br.sistemarestaurante.domain.servicecontracts.IReservaAlterarStatus;
 import com.br.sistemarestaurante.domain.usecase.contract.IReservaContract;
 import com.br.sistemarestaurante.domain.usecase.rule.IAttributeValidatorRule;
 
@@ -30,7 +31,9 @@ public class ReservaUseCase implements IReservaContract {
         final Reserva reservaValid = this.validate(reservaRepositorya, restaurantRepository, clienteRepositorio, reserva);
         return reservaRepositorya.resgistar(reservaValid);
     }
-
+//    VALIDAR HORARIO DE FUNCIONAMENTO DO RESTAURANTE
+//    VALIDAR SE O USUÁRIO JA NAO RESERVOU
+//    VALIDAR PARA NAO ACEITAR NEM DATA NEM HORA PASSA
     @Override
     public Reserva validate(IManterReserva reservaRepository, IBuscarRestaurante restaurantRepository, IManterCliente clienteRepositorio, IAttributeValidatorRule<Reserva> reserva) throws SystemException {
         if (Objects.isNull(reserva)) {
@@ -49,5 +52,8 @@ public class ReservaUseCase implements IReservaContract {
         return reservaValid;
     }
 
-
+    @Override
+    public Reserva reservaAlterarStatus(IReservaAlterarStatus iReservaAlterarStatus, Reserva reserva) {
+        return iReservaAlterarStatus.reservaAterarStatus(reserva);
+    }
 }
