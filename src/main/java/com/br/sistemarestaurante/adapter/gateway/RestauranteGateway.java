@@ -6,12 +6,12 @@ import com.br.sistemarestaurante.adapter.util.IConverterToDTO;
 import com.br.sistemarestaurante.adapter.util.IConverterToDomainEntity;
 import com.br.sistemarestaurante.domain.entity.Restaurante;
 import com.br.sistemarestaurante.domain.usecase.scenario.RestauranteUseCase;
-import com.br.sistemarestaurante.infrastructure.persistence.entity.RestauranteTable;
 import com.br.sistemarestaurante.infrastructure.persistence.usecase.RestauranteRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class RestauranteGateway implements IConverterToDTO<RestauranteDTO, Restaurante> {
@@ -28,8 +28,9 @@ public class RestauranteGateway implements IConverterToDTO<RestauranteDTO, Resta
         return this.ToDTO(restaurante);
     }
 
-    public List<RestauranteTable> buscar(RestauranteSearchDTO restauranteSearchDTO) {
-        return new RestauranteUseCase().findByNomeOrLocalizacaoOrTipoCozinha(this.repository, restauranteSearchDTO);
+    public List<RestauranteDTO> buscar(RestauranteSearchDTO restauranteSearchDTO) {
+        Restaurante restaurante = new Restaurante(restauranteSearchDTO.nome(), restauranteSearchDTO.localizacao(), restauranteSearchDTO.tipoCozinha());
+        return new RestauranteUseCase().findByNomeOrLocalizacaoOrTipoCozinha(this.repository, restaurante).stream().map(this::ToDTO).collect(Collectors.toList());
 
     }
 
