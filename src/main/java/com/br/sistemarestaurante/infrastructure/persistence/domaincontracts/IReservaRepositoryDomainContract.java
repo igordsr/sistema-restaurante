@@ -1,7 +1,9 @@
 package com.br.sistemarestaurante.infrastructure.persistence.domaincontracts;
 
-import com.br.sistemarestaurante.domain.servicecontracts.IRegistrarReserva;
-import com.br.sistemarestaurante.domain.servicecontracts.IReservaAlterarStatus;
+import com.br.sistemarestaurante.domain.servicecontracts.IManterReserva;
+import org.springframework.stereotype.Repository;
 
-public interface IReservaRepositoryDomainContract extends IRegistrarReserva, IReservaAlterarStatus {
+@Repository
+public interface IReservaRepositoryDomainContract extends IManterReserva {
+
 }

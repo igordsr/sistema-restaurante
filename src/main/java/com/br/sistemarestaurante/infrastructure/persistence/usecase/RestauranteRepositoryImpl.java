@@ -24,7 +24,7 @@ public class RestauranteRepositoryImpl implements IRestauranteRepositoryDomainCo
 
     @Override
     public Restaurante resgistar(Restaurante restaurante) {
-        final RestauranteTable restauranteTable = this.convertRestauranteDomainToRestauranteDataBaseEntity(restaurante);
+        final RestauranteTable restauranteTable = RestauranteTable.getInstance(restaurante);
         return this.repository.save(restauranteTable).ToDomainEntity();
     }
 
@@ -35,24 +35,13 @@ public class RestauranteRepositoryImpl implements IRestauranteRepositoryDomainCo
 
     @Override
     public List<Restaurante> findByNomeOrLocalizacaoOrTipoCozinha(Restaurante restaurante) {
-        final List<RestauranteTable> restaurantes = this.repository.findByNomeContainingAndLocalizacaoContainingAndTipoCozinhaContaining(restaurante.getNome(), restaurante.getLocalizacao(), restaurante.getTipoCozinha());
-        return restaurantes.stream().map(RestauranteTable::ToDomainEntity).collect(Collectors.toList());
+        return this.repository.findByNomeContainingAndLocalizacaoContainingAndTipoCozinhaContaining(restaurante.getNome(), restaurante.getLocalizacao(), restaurante.getTipoCozinha())
+                .stream().map(RestauranteTable::ToDomainEntity).collect(Collectors.toList());
     }
 
     @Override
     public RestauranteTable findRestauranteTableById(UUID id) throws RestauranteNotFoundException {
         return this.repository.findById(id).orElseThrow(RestauranteNotFoundException::new);
-    }
-
-    private RestauranteTable convertRestauranteDomainToRestauranteDataBaseEntity(Restaurante restauranteDomain) {
-        final RestauranteTable restauranteTable = new RestauranteTable();
-        restauranteTable.setNome(restauranteDomain.getNome());
-        restauranteTable.setLocalizacao(restauranteDomain.getLocalizacao());
-        restauranteTable.setTipoCozinha(restauranteDomain.getTipoCozinha());
-        restauranteTable.setHorarioAbertura(restauranteDomain.getHorarioAbertura());
-        restauranteTable.setHorarioFechamento(restauranteDomain.getHorarioFechamento());
-        restauranteTable.setCapacidade(restauranteDomain.getCapacidade());
-        return restauranteTable;
     }
 
 
