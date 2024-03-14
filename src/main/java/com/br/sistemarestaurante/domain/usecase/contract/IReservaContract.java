@@ -7,8 +7,10 @@ import com.br.sistemarestaurante.domain.servicecontracts.IManterCliente;
 import com.br.sistemarestaurante.domain.servicecontracts.IRegistrarReserva;
 import com.br.sistemarestaurante.domain.usecase.rule.IAttributeValidatorRule;
 import com.br.sistemarestaurante.domain.usecase.rule.IRegistrarReservaRule;
+import com.br.sistemarestaurante.domain.usecase.rule.IReservaAlterarStatusRule;
 
-public interface IReservaContract extends IRegistrarReservaRule {
+public interface IReservaContract extends IRegistrarReservaRule, IReservaAlterarStatusRule {
 
     Reserva validate(IRegistrarReserva iRegistrarReserva, IBuscarRestaurante restaurantRepository, IManterCliente clienteRepositorio, IAttributeValidatorRule<Reserva> reserva) throws SystemException;
+
 }

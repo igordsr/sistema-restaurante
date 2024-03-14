@@ -1,7 +1,8 @@
 package com.br.sistemarestaurante.infrastructure.persistence.usecase;
 
 import com.br.sistemarestaurante.domain.entity.Reserva;
-import com.br.sistemarestaurante.domain.servicecontracts.IRegistrarReserva;
+import com.br.sistemarestaurante.domain.exception.ReservaNotFoundException;
+import com.br.sistemarestaurante.infrastructure.persistence.domaincontracts.IReservaRepositoryDomainContract;
 import com.br.sistemarestaurante.infrastructure.persistence.entity.ClienteTable;
 import com.br.sistemarestaurante.infrastructure.persistence.entity.ReservaTable;
 import com.br.sistemarestaurante.infrastructure.persistence.entity.RestauranteTable;
@@ -10,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ReservaRepositoryImpl implements IRegistrarReserva {
+public class ReservaRepositoryImpl implements IReservaRepositoryDomainContract {
     private final IReservaRepository repository;
     private final RestauranteRepositoryImpl restauranteRepository;
     private final ClienteRepositoryImpl clienteRepository;
@@ -42,4 +43,10 @@ public class ReservaRepositoryImpl implements IRegistrarReserva {
     }
 
 
+    @Override
+    public Reserva reservaAterarStatus(Reserva reserva) {
+        ReservaTable reservaTable = this.repository.findById(reserva.getIdentificador()).orElseThrow(ReservaNotFoundException::new);
+        reservaTable.setStatus(reserva.getStatus());
+        return this.repository.save(reservaTable).ToDomainEntity();
+    }
 }
