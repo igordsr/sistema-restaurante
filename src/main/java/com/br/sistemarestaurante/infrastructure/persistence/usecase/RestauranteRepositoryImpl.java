@@ -24,7 +24,7 @@ public class RestauranteRepositoryImpl implements IRestauranteRepositoryDomainCo
 
     @Override
     public Restaurante resgistar(Restaurante restaurante) {
-        final RestauranteTable restauranteTable = this.convertRestauranteDomainToRestauranteDataBaseEntity(restaurante);
+        final RestauranteTable restauranteTable = RestauranteTable.getInstance(restaurante);
         return this.repository.save(restauranteTable).ToDomainEntity();
     }
 
@@ -41,17 +41,6 @@ public class RestauranteRepositoryImpl implements IRestauranteRepositoryDomainCo
     @Override
     public List<RestauranteTable> findByNomeOrLocalizacaoOrTipoCozinha(RestauranteSearchDTO restauranteSearchDTO) {
         return this.repository.findByNomeContainingAndLocalizacaoContainingAndTipoCozinhaContaining(restauranteSearchDTO.nome(), restauranteSearchDTO.localizacao(), restauranteSearchDTO.tipoCozinha());
-    }
-
-    private RestauranteTable convertRestauranteDomainToRestauranteDataBaseEntity(Restaurante restauranteDomain) {
-        final RestauranteTable restauranteTable = new RestauranteTable();
-        restauranteTable.setNome(restauranteDomain.getNome());
-        restauranteTable.setLocalizacao(restauranteDomain.getLocalizacao());
-        restauranteTable.setTipoCozinha(restauranteDomain.getTipoCozinha());
-        restauranteTable.setHorarioAbertura(restauranteDomain.getHorarioAbertura());
-        restauranteTable.setHorarioFechamento(restauranteDomain.getHorarioFechamento());
-        restauranteTable.setCapacidade(restauranteDomain.getCapacidade());
-        return restauranteTable;
     }
 
 }

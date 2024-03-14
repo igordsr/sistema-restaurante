@@ -8,6 +8,7 @@ import lombok.Data;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
+
 @Data
 @Entity
 @Table(name = "restaurantes")
@@ -41,5 +42,17 @@ public class RestauranteTable implements IConverterToDomainEntity<Restaurante> {
     @Override
     public Restaurante ToDomainEntity() {
         return new Restaurante(id, nome, localizacao, tipoCozinha, horarioAbertura, horarioFechamento, capacidade);
+    }
+
+    public static RestauranteTable getInstance(Restaurante restauranteDomain) {
+        final RestauranteTable restauranteTable = new RestauranteTable();
+        restauranteTable.setId(restauranteDomain.getIdentificador());
+        restauranteTable.setNome(restauranteDomain.getNome());
+        restauranteTable.setLocalizacao(restauranteDomain.getLocalizacao());
+        restauranteTable.setTipoCozinha(restauranteDomain.getTipoCozinha());
+        restauranteTable.setHorarioAbertura(restauranteDomain.getHorarioAbertura());
+        restauranteTable.setHorarioFechamento(restauranteDomain.getHorarioFechamento());
+        restauranteTable.setCapacidade(restauranteDomain.getCapacidade());
+        return restauranteTable;
     }
 }

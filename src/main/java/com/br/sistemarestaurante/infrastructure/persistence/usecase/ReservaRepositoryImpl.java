@@ -1,7 +1,9 @@
 package com.br.sistemarestaurante.infrastructure.persistence.usecase;
 
 import com.br.sistemarestaurante.domain.entity.Reserva;
-import com.br.sistemarestaurante.domain.servicecontracts.IRegistrarReserva;
+import com.br.sistemarestaurante.domain.entity.Restaurante;
+import com.br.sistemarestaurante.domain.entity.StatusReserva;
+import com.br.sistemarestaurante.infrastructure.persistence.domaincontracts.IReservaRepositoryDomainContract;
 import com.br.sistemarestaurante.infrastructure.persistence.entity.ClienteTable;
 import com.br.sistemarestaurante.infrastructure.persistence.entity.ReservaTable;
 import com.br.sistemarestaurante.infrastructure.persistence.entity.RestauranteTable;
@@ -9,8 +11,13 @@ import com.br.sistemarestaurante.infrastructure.persistence.repository.IReservaR
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
-public class ReservaRepositoryImpl implements IRegistrarReserva {
+public class ReservaRepositoryImpl implements IReservaRepositoryDomainContract {
     private final IReservaRepository repository;
     private final RestauranteRepositoryImpl restauranteRepository;
     private final ClienteRepositoryImpl clienteRepository;
@@ -42,4 +49,12 @@ public class ReservaRepositoryImpl implements IRegistrarReserva {
     }
 
 
+    @Override
+    public List<Reserva> listarReservasRestaurantePeloStatusReserva(Restaurante restaurante, Calendar data, LocalTime hora, StatusReserva statusReserva) {
+        final RestauranteTable instance = RestauranteTable.getInstance(restaurante);
+        return this.repository.findByRestauranteAndDataAndHoraAndStatus(instance, data, hora, statusReserva)
+                .stream()
+                .map(ReservaTable::ToDomainEntity)
+                .collect(Collectors.toList());
+    }
 }

@@ -10,6 +10,5 @@ import java.util.UUID;
 
 public interface IBuscarRestaurante {
     Optional<Restaurante> findRestauranteById(final UUID id);
-
     List<RestauranteTable> findByNomeOrLocalizacaoOrTipoCozinha(RestauranteSearchDTO restauranteSearchDTO);
 }
