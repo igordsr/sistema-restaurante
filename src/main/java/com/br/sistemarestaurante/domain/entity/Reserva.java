@@ -25,6 +25,11 @@ public final class Reserva implements IAttributeValidatorRule<Reserva> {
         this.status = StatusReserva.RESERVADO;
     }
 
+    public Reserva(UUID identificador, StatusReserva status) {
+        this.identificador = identificador;
+        this.status = status;
+    }
+
     public UUID getIdentificador() {
         return identificador;
     }

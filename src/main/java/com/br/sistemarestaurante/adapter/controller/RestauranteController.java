@@ -3,7 +3,6 @@ package com.br.sistemarestaurante.adapter.controller;
 import com.br.sistemarestaurante.adapter.dto.RestauranteDTO;
 import com.br.sistemarestaurante.adapter.dto.RestauranteSearchDTO;
 import com.br.sistemarestaurante.adapter.gateway.RestauranteGateway;
-import com.br.sistemarestaurante.infrastructure.persistence.entity.RestauranteTable;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +29,7 @@ public class RestauranteController {
     }
 
     @GetMapping("/restaurantes")
-    public List<RestauranteTable> buscar(
+    public List<RestauranteDTO> buscar(
             @ModelAttribute RestauranteSearchDTO restauranteSearchDTO) {
         return this.restauranteGateway.buscar(restauranteSearchDTO);
     }

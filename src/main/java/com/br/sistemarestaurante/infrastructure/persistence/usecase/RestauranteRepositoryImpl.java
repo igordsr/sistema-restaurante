@@ -1,6 +1,5 @@
 package com.br.sistemarestaurante.infrastructure.persistence.usecase;
 
-import com.br.sistemarestaurante.adapter.dto.RestauranteSearchDTO;
 import com.br.sistemarestaurante.domain.entity.Restaurante;
 import com.br.sistemarestaurante.domain.exception.RestauranteNotFoundException;
 import com.br.sistemarestaurante.infrastructure.persistence.domaincontracts.IRestauranteRepositoryDomainContract;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class RestauranteRepositoryImpl implements IRestauranteRepositoryDomainContract {
@@ -34,13 +34,14 @@ public class RestauranteRepositoryImpl implements IRestauranteRepositoryDomainCo
     }
 
     @Override
-    public RestauranteTable findRestauranteTableById(UUID id) throws RestauranteNotFoundException {
-        return this.repository.findById(id).orElseThrow(RestauranteNotFoundException::new);
+    public List<Restaurante> findByNomeOrLocalizacaoOrTipoCozinha(Restaurante restaurante) {
+        final List<RestauranteTable> restaurantes = this.repository.findByNomeContainingAndLocalizacaoContainingAndTipoCozinhaContaining(restaurante.getNome(), restaurante.getLocalizacao(), restaurante.getTipoCozinha());
+        return restaurantes.stream().map(RestauranteTable::ToDomainEntity).collect(Collectors.toList());
     }
 
     @Override
-    public List<RestauranteTable> findByNomeOrLocalizacaoOrTipoCozinha(RestauranteSearchDTO restauranteSearchDTO) {
-        return this.repository.findByNomeContainingAndLocalizacaoContainingAndTipoCozinhaContaining(restauranteSearchDTO.nome(), restauranteSearchDTO.localizacao(), restauranteSearchDTO.tipoCozinha());
+    public RestauranteTable findRestauranteTableById(UUID id) throws RestauranteNotFoundException {
+        return this.repository.findById(id).orElseThrow(RestauranteNotFoundException::new);
     }
 
     private RestauranteTable convertRestauranteDomainToRestauranteDataBaseEntity(Restaurante restauranteDomain) {
@@ -53,5 +54,6 @@ public class RestauranteRepositoryImpl implements IRestauranteRepositoryDomainCo
         restauranteTable.setCapacidade(restauranteDomain.getCapacidade());
         return restauranteTable;
     }
+
 
 }
