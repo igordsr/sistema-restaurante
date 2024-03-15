@@ -1,6 +1,7 @@
 package com.br.sistemarestaurante.adapter.dto;
 
 import com.br.sistemarestaurante.adapter.util.IConverterToDomainEntity;
+import com.br.sistemarestaurante.domain.annotation.NotPastDate;
 import com.br.sistemarestaurante.domain.entity.Cliente;
 import com.br.sistemarestaurante.domain.entity.Reserva;
 import com.br.sistemarestaurante.domain.entity.StatusReserva;
@@ -31,7 +32,7 @@ public record ReservaDTO(
         @NotNull(message = "O Atributo [telefoneCliente] da Reserva não pode estar em nulo.")
         @NotBlank(message = "O Atributo [telefoneCliente] da Reserva não pode estar em Branco.")
         String telefoneCliente,
-
+        @NotPastDate
         @NotNull(message = "O Atributo [data] da Reserva não pode estar em nulo.")
         Calendar data,
 
