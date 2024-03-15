@@ -1,6 +1,6 @@
 package com.br.sistemarestaurante.infrastructure.persistence.entity;
 
-import com.br.sistemarestaurante.adapter.util.IConverterToDomainEntity;
+import com.br.sistemarestaurante.application.util.IConverterToDomainEntity;
 import com.br.sistemarestaurante.domain.entity.Cliente;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -32,6 +32,14 @@ public class ClienteTable implements IConverterToDomainEntity<Cliente> {
     @Override
     public Cliente ToDomainEntity() {
         return new Cliente(id, nome, email, telefone);
+    }
+
+    public static ClienteTable getInstance(Cliente cliente) {
+        final ClienteTable clienteTable = new ClienteTable();
+        clienteTable.setEmail(cliente.getEmail());
+        clienteTable.setTelefone(cliente.getTelefone());
+        clienteTable.setNome(cliente.getNome());
+        return clienteTable;
     }
 
 }

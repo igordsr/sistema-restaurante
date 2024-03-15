@@ -1,6 +1,6 @@
 package com.br.sistemarestaurante.infrastructure.persistence.entity;
 
-import com.br.sistemarestaurante.adapter.util.IConverterToDomainEntity;
+import com.br.sistemarestaurante.application.util.IConverterToDomainEntity;
 import com.br.sistemarestaurante.domain.entity.Restaurante;
 import jakarta.persistence.*;
 import lombok.Data;
