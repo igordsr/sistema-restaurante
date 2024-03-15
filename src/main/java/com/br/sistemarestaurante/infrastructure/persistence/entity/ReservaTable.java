@@ -1,6 +1,6 @@
 package com.br.sistemarestaurante.infrastructure.persistence.entity;
 
-import com.br.sistemarestaurante.adapter.util.IConverterToDomainEntity;
+import com.br.sistemarestaurante.application.util.IConverterToDomainEntity;
 import com.br.sistemarestaurante.domain.entity.Reserva;
 import com.br.sistemarestaurante.domain.entity.StatusReserva;
 import jakarta.persistence.*;
@@ -43,5 +43,16 @@ public class ReservaTable implements IConverterToDomainEntity<Reserva> {
     @Override
     public Reserva ToDomainEntity() {
         return new Reserva(id, restaurante.getId(), clienteTable.ToDomainEntity(), data, hora);
+    }
+
+    public static ReservaTable getInstance(Reserva reserva, RestauranteTable restauranteTable, ClienteTable clienteTable) {
+        final ReservaTable reservaTable = new ReservaTable();
+        reservaTable.setId(reserva.getIdentificador());
+        reservaTable.setRestaurante(restauranteTable);
+        reservaTable.setClienteTable(clienteTable);
+        reservaTable.setData(reserva.getData());
+        reservaTable.setHora(reserva.getHora());
+        reservaTable.setStatus(reserva.getStatus());
+        return reservaTable;
     }
 }

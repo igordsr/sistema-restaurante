@@ -2,7 +2,7 @@ package com.br.sistemarestaurante.domain.usecase.rule;
 
 import com.br.sistemarestaurante.domain.entity.Reserva;
 import com.br.sistemarestaurante.domain.exception.SystemException;
-import com.br.sistemarestaurante.domain.servicecontracts.IAlterarStatusReserva;
+import com.br.sistemarestaurante.domain.servicecontracts.businessrule.IAlterarStatusReserva;
 
 public interface IAlterarStatusReservaRule {
 
