@@ -4,6 +4,6 @@ import com.br.sistemarestaurante.domain.servicecontracts.IManterReserva;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IReservaRepositoryDomainContract extends IManterReserva {
+public interface IRepositoryDomainContractReserva extends IManterReserva {
 
 }

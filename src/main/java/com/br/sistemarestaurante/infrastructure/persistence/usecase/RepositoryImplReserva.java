@@ -4,7 +4,7 @@ import com.br.sistemarestaurante.domain.entity.Reserva;
 import com.br.sistemarestaurante.domain.entity.Restaurante;
 import com.br.sistemarestaurante.domain.entity.StatusReserva;
 import com.br.sistemarestaurante.domain.exception.ReservaNotFoundException;
-import com.br.sistemarestaurante.infrastructure.persistence.domaincontracts.IReservaRepositoryDomainContract;
+import com.br.sistemarestaurante.infrastructure.persistence.domaincontracts.IRepositoryDomainContractReserva;
 import com.br.sistemarestaurante.infrastructure.persistence.entity.ClienteTable;
 import com.br.sistemarestaurante.infrastructure.persistence.entity.ReservaTable;
 import com.br.sistemarestaurante.infrastructure.persistence.entity.RestauranteTable;
@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class ReservaRepositoryImpl implements IReservaRepositoryDomainContract {
+public class RepositoryImplReserva implements IRepositoryDomainContractReserva {
     private final IReservaRepository repository;
     private final RestauranteRepositoryImpl restauranteRepository;
     private final ClienteRepositoryImpl clienteRepository;
 
     @Autowired
-    public ReservaRepositoryImpl(IReservaRepository iReservaRepository, RestauranteRepositoryImpl iRestauranteRepository, ClienteRepositoryImpl clienteRepository) {
+    public RepositoryImplReserva(IReservaRepository iReservaRepository, RestauranteRepositoryImpl iRestauranteRepository, ClienteRepositoryImpl clienteRepository) {
         this.repository = iReservaRepository;
         this.restauranteRepository = iRestauranteRepository;
         this.clienteRepository = clienteRepository;
@@ -60,7 +60,7 @@ public class ReservaRepositoryImpl implements IReservaRepositoryDomainContract {
     }
 
     @Override
-    public Reserva reservaAterarStatus(Reserva reserva) {
+    public Reserva aterarStatusDaReserva(Reserva reserva) {
         ReservaTable reservaTable = this.repository.findById(reserva.getIdentificador()).orElseThrow(ReservaNotFoundException::new);
         reservaTable.setStatus(reserva.getStatus());
         return this.repository.save(reservaTable).ToDomainEntity();

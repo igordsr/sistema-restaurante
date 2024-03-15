@@ -2,7 +2,9 @@ package com.br.sistemarestaurante.domain.servicecontracts;
 
 import com.br.sistemarestaurante.domain.entity.Reserva;
 
-public interface IReservaAlterarStatus {
+public interface IAlterarStatusReserva {
 
-    Reserva reservaAterarStatus(final Reserva reserva);
+    Reserva aterarStatusDaReserva(final Reserva reserva);
+
+
 }
