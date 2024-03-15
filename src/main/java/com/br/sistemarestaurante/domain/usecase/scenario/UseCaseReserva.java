@@ -4,7 +4,10 @@ import com.br.sistemarestaurante.domain.entity.Cliente;
 import com.br.sistemarestaurante.domain.entity.Reserva;
 import com.br.sistemarestaurante.domain.entity.Restaurante;
 import com.br.sistemarestaurante.domain.entity.StatusReserva;
-import com.br.sistemarestaurante.domain.exception.*;
+import com.br.sistemarestaurante.domain.exception.DataNaoPassadaException;
+import com.br.sistemarestaurante.domain.exception.ReservaNaoDisponivelException;
+import com.br.sistemarestaurante.domain.exception.RestauranteNotFoundException;
+import com.br.sistemarestaurante.domain.exception.SystemException;
 import com.br.sistemarestaurante.domain.servicecontracts.IBuscarRestaurante;
 import com.br.sistemarestaurante.domain.servicecontracts.IManterCliente;
 import com.br.sistemarestaurante.domain.servicecontracts.IManterReserva;
@@ -32,7 +35,7 @@ public class UseCaseReserva implements IContractReserva {
     }
 
     @Override
-    public void verificarHoraDaReservaEDoRestaurante(Reserva reserva, Restaurante restaurante) throws RestauranteFechadoException {
+    public void verificarHoraDaReservaEDoRestaurante(Reserva reserva, Restaurante restaurante) throws SystemException {
         IVerificarHoraDaReservaDoRestauranteRule.validarHorario(reserva, restaurante);
     }
 
@@ -57,12 +60,12 @@ public class UseCaseReserva implements IContractReserva {
     }
 
     @Override
-    public Reserva registarNoRepositorioDeDados(Reserva reserva) {
+    public Reserva registarNoRepositorioDeDados(Reserva reserva) throws SystemException {
         return IRegistrarReservaRule.salvar(this, this.reservaRepository, reserva);
     }
 
     @Override
-    public Reserva alterarStatusDaReserva(Reserva reserva) {
+    public Reserva alterarStatusDaReserva(Reserva reserva) throws SystemException{
         return IAlterarStatusReservaRule.atualizar(this, this.reservaRepository, reserva);
     }
 
