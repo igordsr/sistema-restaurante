@@ -8,14 +8,16 @@ import com.br.sistemarestaurante.domain.exception.DataNaoPassadaException;
 import com.br.sistemarestaurante.domain.exception.ReservaNaoDisponivelException;
 import com.br.sistemarestaurante.domain.exception.RestauranteNotFoundException;
 import com.br.sistemarestaurante.domain.exception.SystemException;
-import com.br.sistemarestaurante.domain.servicecontracts.businessrule.IBuscarRestaurante;
 import com.br.sistemarestaurante.domain.servicecontracts.IManterCliente;
 import com.br.sistemarestaurante.domain.servicecontracts.IManterReserva;
+import com.br.sistemarestaurante.domain.servicecontracts.businessrule.IBuscarReserva;
+import com.br.sistemarestaurante.domain.servicecontracts.businessrule.IBuscarRestaurante;
 import com.br.sistemarestaurante.domain.usecase.contract.IContractReserva;
 import com.br.sistemarestaurante.domain.usecase.rule.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class UseCaseReserva implements IContractReserva {
 
@@ -65,9 +67,12 @@ public class UseCaseReserva implements IContractReserva {
     }
 
     @Override
-    public Reserva alterarStatusDaReserva(Reserva reserva) throws SystemException{
+    public Reserva alterarStatusDaReserva(Reserva reserva) throws SystemException {
         return IAlterarStatusReservaRule.atualizar(this, this.reservaRepository, reserva);
     }
 
-
+    @Override
+    public List<Reserva> buscarReservaPorRestaurante(IBuscarReserva repository, UUID restauranteId) throws SystemException {
+        return repository.buscarReservaPorRestaurante(restauranteId);
+    }
 }

@@ -10,7 +10,10 @@ import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
+
 @Repository
 public interface IReservaRepository extends JpaRepository<ReservaTable, UUID> {
     List<ReservaTable> findByRestauranteAndDataAndHoraAndStatus(RestauranteTable restaurante, Calendar data, LocalTime hora, StatusReserva status);
+
+    List<ReservaTable> findByRestauranteId(UUID restauranteId);
 }
