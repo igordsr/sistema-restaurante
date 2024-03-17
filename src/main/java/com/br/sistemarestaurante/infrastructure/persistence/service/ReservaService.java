@@ -57,6 +57,6 @@ public class ReservaService implements IReservaRepositoryDomainContract {
 
     @Override
     public List<Reserva> buscarReservaPorRestaurante(UUID restauranteId) {
-        return this.repository.findByRestauranteId(restauranteId).stream().map(ReservaTable::ToDomainEntity).collect(Collectors.toList());
+        return this.repository.findByRestauranteId(restauranteId).stream().map(ReservaTable::ToDomainEntity).toList();
     }
 }

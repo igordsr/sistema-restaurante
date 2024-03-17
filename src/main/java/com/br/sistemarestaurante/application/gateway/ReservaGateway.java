@@ -41,7 +41,7 @@ public class ReservaGateway implements IConverterToDTO<ReservaDTO, Reserva> {
     }
 
     public List<ReservaDTO> buscarReservaPorRestaurante(UUID restauranteId) {
-        return new UseCaseReserva(this.reservaService, restauranteService, this.clienteService).buscarReservaPorRestaurante(this.reservaService, restauranteId).stream().map(this::ToDTO).collect(Collectors.toList());
+        return new ReservaUseCase(this.reservaService, restauranteService, this.clienteService).buscarReservaPorRestaurante(this.reservaService, restauranteId).stream().map(this::toDTO).collect(Collectors.toList());
     }
 
 

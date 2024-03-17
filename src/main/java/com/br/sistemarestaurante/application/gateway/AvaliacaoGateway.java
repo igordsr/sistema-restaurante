@@ -10,35 +10,56 @@ import com.br.sistemarestaurante.domain.entity.Restaurante;
 import com.br.sistemarestaurante.domain.usecase.AvaliacaoUseCase;
 import com.br.sistemarestaurante.domain.usecase.RestauranteUseCase;
 import com.br.sistemarestaurante.infrastructure.persistence.service.AvaliacaoService;
+import com.br.sistemarestaurante.infrastructure.persistence.service.RestauranteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class AvaliacaoGateway implements IConverterToDTO<AvaliacaoDTO, Avaliacao> {
     private final AvaliacaoService repository;
+    private final RestauranteService restauranteService;
 
     @Autowired
-    public AvaliacaoGateway(AvaliacaoService avaliacaoRepository) {
+    public AvaliacaoGateway(AvaliacaoService avaliacaoRepository, RestauranteService restauranteService) {
         this.repository = avaliacaoRepository;
+        this.restauranteService = restauranteService;
     }
 
     public AvaliacaoDTO registrar(final IConverterToDomainEntity<Avaliacao> obj) {
         Avaliacao avaliacao = obj.ToDomainEntity();
         avaliacao = new AvaliacaoUseCase(repository).registarNoRepositorioDeDados(avaliacao);
-        return this.ToDTO(avaliacao);
+        return this.toDTO(avaliacao);
     }
 
     public List<RestauranteDTO> buscar(RestauranteSearchDTO restauranteSearchDTO) {
-        Restaurante restaurante = new Restaurante(restauranteSearchDTO.nome(), restauranteSearchDTO.localizacao(), restauranteSearchDTO.tipoCozinha());
-        return new RestauranteUseCase(repository).findByNomeOrLocalizacaoOrTipoCozinha(restaurante).stream().map(this::ToDTO).collect(Collectors.toList());
+        Restaurante restaurante = new Restaurante(
+                restauranteSearchDTO.nome(),
+                restauranteSearchDTO.localizacao(),
+                restauranteSearchDTO.tipoCozinha()
+        );
 
+        return new RestauranteUseCase(restauranteService)
+                .findByNomeOrLocalizacaoOrTipoCozinha(restaurante)
+                .stream()
+                .map(this::converterRestauranteParaDTO)
+                .toList();
     }
 
+    private RestauranteDTO converterRestauranteParaDTO(Restaurante restaurante) {
+        return new RestauranteDTO(
+                restaurante.getIdentificador(),
+                restaurante.getNome(),
+                restaurante.getLocalizacao(),
+                restaurante.getTipoCozinha(),
+                restaurante.getHorarioAbertura(),
+                restaurante.getHorarioFechamento(),
+                restaurante.getCapacidade()
+        );
+    }
     @Override
-    public AvaliacaoDTO ToDTO(Avaliacao avaliacao) {
+    public AvaliacaoDTO toDTO(Avaliacao avaliacao) {
         return new AvaliacaoDTO(
                 avaliacao.getIdentificador(),
                 avaliacao.getReservaId(),
