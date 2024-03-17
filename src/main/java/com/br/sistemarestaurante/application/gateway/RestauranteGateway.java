@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class RestauranteGateway implements IConverterToDTO<RestauranteDTO, Restaurante> {
@@ -25,17 +24,17 @@ public class RestauranteGateway implements IConverterToDTO<RestauranteDTO, Resta
     public RestauranteDTO registrar(final IConverterToDomainEntity<Restaurante> obj) {
         Restaurante restaurante = obj.ToDomainEntity();
         restaurante = new RestauranteUseCase(repository).registarNoRepositorioDeDados(restaurante);
-        return this.ToDTO(restaurante);
+        return this.toDTO(restaurante);
     }
 
     public List<RestauranteDTO> buscar(RestauranteSearchDTO restauranteSearchDTO) {
         Restaurante restaurante = new Restaurante(restauranteSearchDTO.nome(), restauranteSearchDTO.localizacao(), restauranteSearchDTO.tipoCozinha());
-        return new RestauranteUseCase(repository).findByNomeOrLocalizacaoOrTipoCozinha(restaurante).stream().map(this::ToDTO).collect(Collectors.toList());
+        return new RestauranteUseCase(repository).findByNomeOrLocalizacaoOrTipoCozinha(restaurante).stream().map(this::toDTO).toList();
 
     }
 
     @Override
-    public RestauranteDTO ToDTO(Restaurante restaurante) {
+    public RestauranteDTO toDTO(Restaurante restaurante) {
         return new RestauranteDTO(
                 restaurante.getIdentificador(),
                 restaurante.getNome(),

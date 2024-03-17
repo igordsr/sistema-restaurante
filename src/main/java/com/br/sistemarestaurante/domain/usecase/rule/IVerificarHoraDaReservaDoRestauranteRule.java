@@ -48,11 +48,5 @@ public interface IVerificarHoraDaReservaDoRestauranteRule {
         }
     }
 
-    private static boolean estaNoHorarioFuncionamento(LocalTime hora, LocalTime horarioAbertura, LocalTime horarioFechamento) {
-        if (horarioAbertura.isBefore(horarioFechamento)) {
-            return !hora.isBefore(horarioAbertura) && !hora.isAfter(horarioFechamento);
-        } else {
-            return !hora.isBefore(horarioAbertura) || !hora.isAfter(horarioFechamento);
-        }
-    }
+
 }

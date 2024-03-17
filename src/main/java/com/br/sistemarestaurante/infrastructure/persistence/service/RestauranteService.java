@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Component
 public class RestauranteService implements IRestauranteRepositoryDomainContract {
@@ -36,7 +35,7 @@ public class RestauranteService implements IRestauranteRepositoryDomainContract 
     @Override
     public List<Restaurante> findByNomeOrLocalizacaoOrTipoCozinha(Restaurante restaurante) {
         return this.repository.findByNomeContainingAndLocalizacaoContainingAndTipoCozinhaContaining(restaurante.getNome(), restaurante.getLocalizacao(), restaurante.getTipoCozinha())
-                .stream().map(RestauranteTable::ToDomainEntity).collect(Collectors.toList());
+                .stream().map(RestauranteTable::ToDomainEntity).toList();
     }
 
     @Override
