@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -30,5 +31,11 @@ public class ReservaController {
     @PutMapping("/{id}/status")
     public ReservaDTO alterarStatus(@PathVariable("id") UUID id, @RequestBody @Valid StatusReserva status) {
         return this.reservaGateway.alterarStatus(id, status);
+    }
+
+    @GetMapping("/restaurante/{id}")
+    public List<ReservaDTO> buscar(
+            @PathVariable("id") UUID id) {
+        return this.reservaGateway.buscarReservaPorRestaurante(id);
     }
 }

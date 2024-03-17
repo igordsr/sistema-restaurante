@@ -12,7 +12,9 @@ import com.br.sistemarestaurante.infrastructure.persistence.service.RestauranteS
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class ReservaGateway implements IConverterToDTO<ReservaDTO, Reserva> {
@@ -36,6 +38,10 @@ public class ReservaGateway implements IConverterToDTO<ReservaDTO, Reserva> {
     public ReservaDTO alterarStatus(UUID id, StatusReserva status) {
         Reserva reserva = new Reserva(id, status);
         return this.toDTO(new ReservaUseCase(this.reservaService, restauranteService, this.clienteService).alterarStatusDaReserva(reserva));
+    }
+
+    public List<ReservaDTO> buscarReservaPorRestaurante(UUID restauranteId) {
+        return new UseCaseReserva(this.reservaService, restauranteService, this.clienteService).buscarReservaPorRestaurante(this.reservaService, restauranteId).stream().map(this::ToDTO).collect(Collectors.toList());
     }
 
 
