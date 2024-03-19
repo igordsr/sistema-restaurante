@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/avaliacao", produces = {"application/json"})
@@ -29,6 +30,12 @@ public class AvaliacaoController {
     public ResponseEntity<AvaliacaoDTO> registrar(@RequestBody @Valid AvaliacaoDTO avaliacaoDTO) {
         avaliacaoDTO = this.avaliacaoGateway.registrar(avaliacaoDTO);
         return new ResponseEntity<>(avaliacaoDTO, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AvaliacaoDTO>> buscarPorReserva(
+            @PathVariable("reservaId")UUID reservaId){
+        return new ResponseEntity<>(this.avaliacaoGateway.buscar(reservaId), HttpStatus.NO_CONTENT);
     }
 
 }

@@ -11,5 +11,5 @@ import java.util.UUID;
 @Repository
 public interface IAvaliacaoRepository extends JpaRepository<AvaliacaoTable, UUID> {
 
-//    List<AvaliacaoTable> findByReservaId(UUID reservaId);
+    List<AvaliacaoTable> findByReservaTable(UUID reservaTable);
 }

@@ -1,12 +1,9 @@
 package com.br.sistemarestaurante.infrastructure.persistence.service;
 
 import com.br.sistemarestaurante.domain.entity.Avaliacao;
-import com.br.sistemarestaurante.domain.entity.Restaurante;
 import com.br.sistemarestaurante.domain.exception.AvaliacaoNotFoundException;
-import com.br.sistemarestaurante.domain.exception.RestauranteNotFoundException;
 import com.br.sistemarestaurante.infrastructure.persistence.domaincontracts.IAvaliacaoRepositoryDomainContract;
 import com.br.sistemarestaurante.infrastructure.persistence.entity.AvaliacaoTable;
-import com.br.sistemarestaurante.infrastructure.persistence.entity.RestauranteTable;
 import com.br.sistemarestaurante.infrastructure.persistence.repository.IAvaliacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,8 +29,10 @@ public class AvaliacaoService implements IAvaliacaoRepositoryDomainContract {
     }
 
     @Override
-    public List<Avaliacao> findByReservaId(UUID id) {
-        return this.findByReservaId(id);
+    public List<Avaliacao> findByReservaTable(UUID id) {
+        return this.repository.findByReservaTable(id).stream()
+                .map(AvaliacaoTable::ToDomainEntity)
+                .collect(Collectors.toList());
     }
 
     @Override
