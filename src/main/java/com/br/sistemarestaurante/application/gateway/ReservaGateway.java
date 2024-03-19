@@ -5,7 +5,7 @@ import com.br.sistemarestaurante.application.util.IConverterToDTO;
 import com.br.sistemarestaurante.application.util.IConverterToDomainEntity;
 import com.br.sistemarestaurante.domain.entity.Reserva;
 import com.br.sistemarestaurante.domain.entity.StatusReserva;
-import com.br.sistemarestaurante.domain.usecase.UseCaseReserva;
+import com.br.sistemarestaurante.domain.usecase.ReservaUseCase;
 import com.br.sistemarestaurante.infrastructure.persistence.service.ClienteService;
 import com.br.sistemarestaurante.infrastructure.persistence.service.ReservaService;
 import com.br.sistemarestaurante.infrastructure.persistence.service.RestauranteService;
@@ -31,22 +31,22 @@ public class ReservaGateway implements IConverterToDTO<ReservaDTO, Reserva> {
 
     public ReservaDTO registrar(final IConverterToDomainEntity<Reserva> obj) {
         Reserva reserva = obj.ToDomainEntity();
-        reserva = new UseCaseReserva(this.reservaService, restauranteService, this.clienteService).registarNoRepositorioDeDados(reserva);
-        return this.ToDTO(reserva);
+        reserva = new ReservaUseCase(this.reservaService, restauranteService, this.clienteService).registarNoRepositorioDeDados(reserva);
+        return this.toDTO(reserva);
     }
 
     public ReservaDTO alterarStatus(UUID id, StatusReserva status) {
         Reserva reserva = new Reserva(id, status);
-        return this.ToDTO(new UseCaseReserva(this.reservaService, restauranteService, this.clienteService).alterarStatusDaReserva(reserva));
+        return this.toDTO(new ReservaUseCase(this.reservaService, restauranteService, this.clienteService).alterarStatusDaReserva(reserva));
     }
 
     public List<ReservaDTO> buscarReservaPorRestaurante(UUID restauranteId) {
-        return new UseCaseReserva(this.reservaService, restauranteService, this.clienteService).buscarReservaPorRestaurante(this.reservaService, restauranteId).stream().map(this::ToDTO).collect(Collectors.toList());
+        return new ReservaUseCase(this.reservaService, restauranteService, this.clienteService).buscarReservaPorRestaurante(this.reservaService, restauranteId).stream().map(this::toDTO).collect(Collectors.toList());
     }
 
 
     @Override
-    public ReservaDTO ToDTO(Reserva reserva) {
+    public ReservaDTO toDTO(Reserva reserva) {
 
         return new ReservaDTO(
                 reserva.getIdentificador(),

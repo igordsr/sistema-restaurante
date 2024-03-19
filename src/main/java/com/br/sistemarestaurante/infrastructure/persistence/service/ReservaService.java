@@ -16,7 +16,6 @@ import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Component
 public class ReservaService implements IReservaRepositoryDomainContract {
@@ -46,7 +45,7 @@ public class ReservaService implements IReservaRepositoryDomainContract {
         return this.repository.findByRestauranteAndDataAndHoraAndStatus(instance, data, hora, statusReserva)
                 .stream()
                 .map(ReservaTable::ToDomainEntity)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -58,6 +57,6 @@ public class ReservaService implements IReservaRepositoryDomainContract {
 
     @Override
     public List<Reserva> buscarReservaPorRestaurante(UUID restauranteId) {
-        return this.repository.findByRestauranteId(restauranteId).stream().map(ReservaTable::ToDomainEntity).collect(Collectors.toList());
+        return this.repository.findByRestauranteId(restauranteId).stream().map(ReservaTable::ToDomainEntity).toList();
     }
 }

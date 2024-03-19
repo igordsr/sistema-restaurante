@@ -19,13 +19,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class UseCaseReserva implements IContractReserva {
-
+public class ReservaUseCase implements IContractReserva {
     private final IManterReserva reservaRepository;
     private final IBuscarRestaurante restaurantRepository;
     private final IManterCliente clienteRepositorio;
 
-    public UseCaseReserva(IManterReserva reservaRepository, IBuscarRestaurante restaurantRepository, IManterCliente clienteRepositorio) {
+    public ReservaUseCase(IManterReserva reservaRepository, IBuscarRestaurante restaurantRepository, IManterCliente clienteRepositorio) {
         this.reservaRepository = reservaRepository;
         this.restaurantRepository = restaurantRepository;
         this.clienteRepositorio = clienteRepositorio;
