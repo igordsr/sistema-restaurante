@@ -23,7 +23,7 @@ public class IClienteRepositoryIT {
     @Test
     void devePermitirCriarTabela() {
         var totalRegistros = clienteRepository.count();
-        assertThat(totalRegistros).isNotNegative();
+        assertThat(totalRegistros).isGreaterThan(0);
     }
 
     @Test
