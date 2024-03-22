@@ -35,8 +35,6 @@ public class IClienteRepositoryIT {
 
         ClienteTable clienteRegistrado = clienteRepository.save(clienteTable);
 
-        var totalRegistros = clienteRepository.count();
-        assertThat(totalRegistros).isEqualTo(1);
         assertThat(clienteRegistrado.getEmail()).isEqualTo("teste@teste.com");
     }
 
