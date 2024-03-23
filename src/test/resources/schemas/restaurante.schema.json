@@ -1,9 +1,32 @@
 {
-  "identificador": "123e4567-e89b-12d3-a456-426614174000",
-  "nome": "Restaurante Exemplo",
-  "localizacao": "Rua Exemplo, 123",
-  "tipoCozinha": "Cozinha Exemplo",
-  "horarioAbertura": "08:00:00",
-  "horarioFechamento": "20:00:00",
-  "capacidade": 50
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "nome": {
+      "type": "string"
+    },
+    "localizacao": {
+      "type": "string"
+    },
+    "tipoCozinha": {
+      "type": "string"
+    },
+    "horarioAbertura": {
+      "type": "string",
+      "format": "time"
+    },
+    "horarioFechamento": {
+      "type": "string",
+      "format": "time"
+    },
+    "capacidade": {
+      "type": "integer"
+    }
+  },
+  "required": ["nome", "localizacao", "tipoCozinha", "horarioAbertura", "horarioFechamento", "capacidade"],
+  "additionalProperties": false
 }
