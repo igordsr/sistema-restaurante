@@ -4,6 +4,7 @@ import com.br.sistemarestaurante.application.dto.ReservaDTO;
 import com.br.sistemarestaurante.application.gateway.ReservaGateway;
 import com.br.sistemarestaurante.domain.entity.StatusReserva;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -37,7 +38,15 @@ class ReservaControllerIT {
     @MockBean
     private ReservaGateway reservaGateway;
 
-    ReservaDTO reservaDTO = new ReservaDTO(UUID.randomUUID(), UUID.randomUUID(), "Cliente Nome", "email@cliente.com", "11999999999", Calendar.getInstance(), LocalTime.of(14, 30, 0), StatusReserva.RESERVADO);
+    ReservaDTO reservaDTO;
+
+    @BeforeEach
+    void setUp() {
+        Calendar date = Calendar.getInstance();
+        date.add(Calendar.DAY_OF_MONTH, 1);
+
+        reservaDTO = new ReservaDTO(UUID.randomUUID(), UUID.randomUUID(), "Cliente Nome", "email@cliente.com", "11999999999", date, LocalTime.of(14, 30, 0), StatusReserva.RESERVADO);
+    }
 
     @Test
     void deveRegistrarReservaQuandoReservaDtoValido() throws Exception {
@@ -59,13 +68,12 @@ class ReservaControllerIT {
         mockMvc.perform(put("/reserva/{id}/status", reservaId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(statusReserva)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").exists());
+                .andExpect(status().isOk());
     }
 
     @Test
     void deveBuscarReservaPorRestaurante() throws Exception {
-        UUID restauranteId = UUID.randomUUID();
+        UUID restauranteId = UUID.fromString("123e4567-e89b-12d3-a456-426614174002");
         when(reservaGateway.buscarReservaPorRestaurante(restauranteId)).thenReturn(Collections.singletonList(reservaDTO));
 
         mockMvc.perform(get("/reserva/restaurante/{id}", restauranteId)

@@ -10,6 +10,9 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -36,5 +39,16 @@ class AvaliacaoControllerTest {
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         assertEquals(avaliacaoDTOMock, responseEntity.getBody());
         verify(avaliacaoGateway, times(1)).registrar(avaliacaoDTOMock);
+    }
+
+    @Test
+    void deveBuscarPorReserva() {
+        UUID uuid = UUID.randomUUID();
+        when(avaliacaoGateway.buscar(uuid)).thenReturn(List.of(avaliacaoDTOMock));
+
+        ResponseEntity<List<AvaliacaoDTO>> responseEntity = avaliacaoController.buscarPorReserva(uuid);
+
+        assertEquals(List.of(avaliacaoDTOMock), responseEntity.getBody());
+        verify(avaliacaoGateway, times(1)).buscar(uuid);
     }
 }
