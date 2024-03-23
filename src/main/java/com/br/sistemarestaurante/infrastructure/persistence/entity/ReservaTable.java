@@ -42,7 +42,7 @@ public class ReservaTable implements IConverterToDomainEntity<Reserva> {
 
     @Override
     public Reserva ToDomainEntity() {
-        return new Reserva(id, restaurante.getId(), clienteTable.ToDomainEntity(), data, hora);
+        return new Reserva(id, restaurante.getId(), clienteTable.ToDomainEntity(), data, hora, this.status);
     }
 
     public static ReservaTable getInstance(Reserva reserva, RestauranteTable restauranteTable, ClienteTable clienteTable) {
