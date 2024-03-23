@@ -33,6 +33,6 @@ public class AvaliacaoUseCase implements IAvaliacaoContract {
 
     @Override
     public List<Avaliacao> buscarAvaliacaoPorReserva(IBuscarAvaliacao repository, UUID reservaId) {
-        return null;
+        return repository.findByReservaTable(reservaId);
     }
 }
