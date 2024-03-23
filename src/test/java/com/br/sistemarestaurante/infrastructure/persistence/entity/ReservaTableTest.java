@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalTime;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
@@ -14,6 +15,39 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ReservaTableTest {
+
+    @Test
+    public void testAvaliacaoTableAssignment() {
+        AvaliacaoTable avaliacaoTableMock = mock(AvaliacaoTable.class);
+
+        ReservaTable reservaTable = new ReservaTable();
+
+        reservaTable.setAvaliacaoTable(avaliacaoTableMock);
+
+        assertEquals(avaliacaoTableMock, reservaTable.getAvaliacaoTable());
+    }
+
+    @Test
+    public void testData() {
+        ReservaTable reservaTable = new ReservaTable();
+
+        Calendar data = new GregorianCalendar(2022, Calendar.JANUARY, 1);
+
+        reservaTable.setData(data);
+
+        assertEquals(data, reservaTable.getData());
+    }
+
+    @Test
+    public void testClienteTableAssignment() {
+        ClienteTable clienteTableMock = mock(ClienteTable.class);
+
+        ReservaTable reservaTable = new ReservaTable();
+
+        reservaTable.setClienteTable(clienteTableMock);
+
+        assertEquals(clienteTableMock, reservaTable.getClienteTable());
+    }
 
     @Test
     public void testToDomainEntity() {

@@ -2,12 +2,34 @@ package com.br.sistemarestaurante.infrastructure.persistence.entity;
 
 import com.br.sistemarestaurante.domain.entity.Avaliacao;
 import org.junit.jupiter.api.Test;
+
 import java.util.UUID;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class AvaliacaoTableTest {
+
+    @Test
+    public void testClassificacao() {
+        AvaliacaoTable avaliacaoTable = new AvaliacaoTable();
+
+        avaliacaoTable.setClassificacao(4);
+
+        assertEquals(4, avaliacaoTable.getClassificacao());
+    }
+
+    @Test
+    public void testReservaTableAssignment() {
+        ReservaTable reservaTableMock = mock(ReservaTable.class);
+
+        AvaliacaoTable avaliacaoTable = new AvaliacaoTable();
+
+        avaliacaoTable.setReservaTable(reservaTableMock);
+
+        assertEquals(reservaTableMock, avaliacaoTable.getReservaTable());
+    }
 
     @Test
     public void testToDomainEntity() {

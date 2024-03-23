@@ -12,6 +12,8 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class RestauranteTableTest {
+
+
     @Test
     public void testToDomainEntity() {
         RestauranteTable restauranteTable = new RestauranteTable();
