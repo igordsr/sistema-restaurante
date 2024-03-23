@@ -8,5 +8,5 @@ import java.util.UUID;
 
 public interface IBuscarAvaliacao {
     Optional<Avaliacao> findAvaliacaoById(final UUID id);
-    List<Avaliacao> findByReservaId(UUID id);
+    List<Avaliacao> findByReservaTable(UUID id);
 }
