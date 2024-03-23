@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -59,5 +60,9 @@ public class ReservaService implements IReservaRepositoryDomainContract {
     @Override
     public List<Reserva> buscarReservaPorRestaurante(UUID restauranteId) {
         return this.repository.findByRestauranteId(restauranteId).stream().map(ReservaTable::ToDomainEntity).toList();
+    }
+
+    public Optional<ReservaTable> buscarReservaTablePorId(UUID id){
+        return this.repository.findById(id);
     }
 }
