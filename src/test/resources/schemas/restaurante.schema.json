@@ -1,0 +1,9 @@
+{
+  "identificador": "123e4567-e89b-12d3-a456-426614174000",
+  "nome": "Restaurante Exemplo",
+  "localizacao": "Rua Exemplo, 123",
+  "tipoCozinha": "Cozinha Exemplo",
+  "horarioAbertura": "08:00:00",
+  "horarioFechamento": "20:00:00",
+  "capacidade": 50
+}
