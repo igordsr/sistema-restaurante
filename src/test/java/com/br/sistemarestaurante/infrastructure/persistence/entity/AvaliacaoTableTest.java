@@ -53,8 +53,7 @@ public class AvaliacaoTableTest {
     @Test
     public void testGetInstance() {
         Avaliacao avaliacao = new Avaliacao(UUID.randomUUID(), UUID.randomUUID(), "Comentario", 4);
-
-
+      
         AvaliacaoTable avaliacaoTable = AvaliacaoTable.getInstance(avaliacao);
 
         assertEquals(avaliacao.getComentario(), avaliacaoTable.getComentario());
