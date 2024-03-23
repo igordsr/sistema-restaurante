@@ -54,9 +54,8 @@ public class AvaliacaoTableTest {
     public void testGetInstance() {
         Avaliacao avaliacao = new Avaliacao(UUID.randomUUID(), UUID.randomUUID(), "Comentario", 4);
 
-        ReservaTable reservaTableMock = mock(ReservaTable.class);
 
-        AvaliacaoTable avaliacaoTable = AvaliacaoTable.getInstance(avaliacao, reservaTableMock);
+        AvaliacaoTable avaliacaoTable = AvaliacaoTable.getInstance(avaliacao);
 
         assertEquals(avaliacao.getComentario(), avaliacaoTable.getComentario());
     }

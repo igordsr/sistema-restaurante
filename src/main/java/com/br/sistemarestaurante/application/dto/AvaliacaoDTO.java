@@ -21,4 +21,24 @@ public record AvaliacaoDTO(
     public Avaliacao ToDomainEntity() {
         return new Avaliacao(id, reservaId, comentario, classificacao);
     }
+
+    @Override
+    public UUID id() {
+        return id;
+    }
+
+    @Override
+    public UUID reservaId() {
+        return reservaId;
+    }
+
+    @Override
+    public String comentario() {
+        return comentario;
+    }
+
+    @Override
+    public int classificacao() {
+        return classificacao;
+    }
 }
