@@ -2,6 +2,7 @@ package com.br.sistemarestaurante.infrastructure.persistence.service;
 
 import com.br.sistemarestaurante.domain.entity.Avaliacao;
 import com.br.sistemarestaurante.infrastructure.persistence.entity.AvaliacaoTable;
+import com.br.sistemarestaurante.infrastructure.persistence.entity.ReservaTable;
 import com.br.sistemarestaurante.infrastructure.persistence.repository.IAvaliacaoRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,8 +27,15 @@ public class AvaliacaoServiceTest {
     @InjectMocks
     private AvaliacaoService avaliacaoService;
 
-    Avaliacao avaliacaoMock = mock(Avaliacao.class);
-    AvaliacaoTable avaliacaoTableMock = mock(AvaliacaoTable.class);
+    @Mock
+    private ReservaService reservaService;
+
+    @Mock
+    private AvaliacaoTable avaliacaoTableMock;
+
+    @Mock
+    private Avaliacao avaliacaoMock;
+
     AutoCloseable openMocks;
 
     @BeforeEach
@@ -56,14 +64,18 @@ public class AvaliacaoServiceTest {
 
     @Test
     void deveBuscarAvaliacoesPorReservaId() {
-        UUID reservaIdTest = mock(UUID.class);
+        UUID reservaIdTest = UUID.randomUUID();
+        ReservaTable reservaTableMock = mock(ReservaTable.class);
 
-        when(avaliacaoRepository.findByReservaTable(any())).thenReturn(List.of(avaliacaoTableMock));
+        when(reservaService.buscarReservaTablePorId(reservaIdTest)).thenReturn(Optional.of(reservaTableMock));
+        when(avaliacaoRepository.findByReservaTable(reservaTableMock)).thenReturn(List.of(avaliacaoTableMock));
+        when(avaliacaoTableMock.ToDomainEntity()).thenReturn(avaliacaoMock);
 
         List<Avaliacao> avaliacoesEncontradas = avaliacaoService.findByReservaTable(reservaIdTest);
 
-        assertThat(avaliacoesEncontradas).isNotNull().isEqualTo(List.of(avaliacaoMock));
-        verify(avaliacaoRepository, times(1)).findByReservaTable(any());
+        assertThat(avaliacoesEncontradas).isNotNull().hasSize(1).contains(avaliacaoMock);
+        verify(avaliacaoRepository, times(1)).findByReservaTable(reservaTableMock);
     }
+
 
 }

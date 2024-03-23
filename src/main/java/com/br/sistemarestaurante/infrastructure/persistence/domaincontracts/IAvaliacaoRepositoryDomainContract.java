@@ -9,5 +9,4 @@ import java.util.UUID;
 
 @Repository
 public interface IAvaliacaoRepositoryDomainContract extends IManterAvaliacao {
-    AvaliacaoTable findAvaliacaoTableById(final UUID id) throws AvaliacaoNotFoundException;
 }
