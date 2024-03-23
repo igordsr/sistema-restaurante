@@ -8,7 +8,7 @@ import java.util.Calendar;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-public class NotPastDateValidatorTest {
+class NotPastDateValidatorTest {
     @Test
     void isValidTest() {
         NotPastDateValidator validator = new NotPastDateValidator();

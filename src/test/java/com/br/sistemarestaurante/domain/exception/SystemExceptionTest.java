@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SystemExceptionTest {
+class SystemExceptionTest {
     @Test
     void testConstructorAndGetMessage() {
         String errorMessage = "Erro genérico";

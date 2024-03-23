@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class RestauranteFechadoExceptionTest {
+class RestauranteFechadoExceptionTest {
 
     @Test
     void testConstructorAndGetMessage() {

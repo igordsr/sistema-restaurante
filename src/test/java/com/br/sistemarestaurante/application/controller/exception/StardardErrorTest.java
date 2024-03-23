@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-public class StardardErrorTest {
+class StardardErrorTest {
 
     @Test
     void testGettersAndSetters() {
