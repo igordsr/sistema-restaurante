@@ -2,12 +2,9 @@ package com.br.sistemarestaurante.application.dto;
 
 import com.br.sistemarestaurante.application.util.IConverterToDomainEntity;
 import com.br.sistemarestaurante.domain.entity.Avaliacao;
-import com.br.sistemarestaurante.domain.entity.Restaurante;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
-import java.time.LocalTime;
 import java.util.UUID;
 
 public record AvaliacaoDTO(
