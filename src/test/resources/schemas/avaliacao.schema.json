@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "reservaId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "comentario": {
+      "type": "string"
+    },
+    "classificacao": {
+      "type": "integer"
+    }
+  },
+  "required": ["reservaId", "comentario", "classificacao"],
+  "additionalProperties": false
+}
