@@ -34,6 +34,7 @@ public class AvaliacaoTable implements IConverterToDomainEntity<Avaliacao> {
 
     public static AvaliacaoTable getInstance(Avaliacao avaliacao) {
         final AvaliacaoTable avaliacaoTable = new AvaliacaoTable();
+        avaliacaoTable.setId(avaliacao.getIdentificador());
         avaliacaoTable.setComentario(avaliacao.getComentario());
         avaliacaoTable.setClassificacao(avaliacao.getClassificacao());
         return avaliacaoTable;
