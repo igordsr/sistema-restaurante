@@ -44,6 +44,8 @@ public class AvaliacaoService implements IAvaliacaoRepositoryDomainContract {
     @Override
     public Avaliacao registrar(Avaliacao avaliacao) {
         final AvaliacaoTable avaliacaoTable = AvaliacaoTable.getInstance(avaliacao);
+        ReservaTable reservaTable = this.reservaService.buscarReservaTablePorId(avaliacao.getReservaId()).orElseThrow(ReservaNotFoundException::new);
+        avaliacaoTable.setReservaTable(reservaTable);
         return this.repository.save(avaliacaoTable).ToDomainEntity();
     }
 

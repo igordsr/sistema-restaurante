@@ -32,10 +32,10 @@ public class AvaliacaoController {
         return new ResponseEntity<>(avaliacaoDTO, HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public ResponseEntity<List<AvaliacaoDTO>> buscarPorReserva(
-            @PathVariable("reservaId")UUID reservaId){
-        return new ResponseEntity<>(this.avaliacaoGateway.buscar(reservaId), HttpStatus.NO_CONTENT);
+    @GetMapping("{id}")
+    public List<AvaliacaoDTO> buscarPorReserva(
+            @PathVariable("id")UUID reservaId){
+        return this.avaliacaoGateway.buscar(reservaId);
     }
 
 }
