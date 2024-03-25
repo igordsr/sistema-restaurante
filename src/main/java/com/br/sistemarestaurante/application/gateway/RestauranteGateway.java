@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class RestauranteGateway implements IConverterToDTO<RestauranteDTO, Restaurante> {
@@ -28,7 +29,11 @@ public class RestauranteGateway implements IConverterToDTO<RestauranteDTO, Resta
     }
 
     public List<RestauranteDTO> buscar(RestauranteSearchDTO restauranteSearchDTO) {
-        Restaurante restaurante = new Restaurante(restauranteSearchDTO.nome(), restauranteSearchDTO.localizacao(), restauranteSearchDTO.tipoCozinha());
+        String nome = Optional.ofNullable(restauranteSearchDTO.nome()).orElse("");
+        String localizacao = Optional.ofNullable(restauranteSearchDTO.localizacao()).orElse("");
+        String tipoCozinha = Optional.ofNullable(restauranteSearchDTO.tipoCozinha()).orElse("");
+
+        Restaurante restaurante = new Restaurante(nome, localizacao, tipoCozinha);
         return new RestauranteUseCase(repository).findByNomeOrLocalizacaoOrTipoCozinha(restaurante).stream().map(this::toDTO).toList();
 
     }
