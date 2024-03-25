@@ -77,5 +77,30 @@ public class AvaliacaoServiceTest {
         verify(avaliacaoRepository, times(1)).findByReservaTable(reservaTableMock);
     }
 
+    @Test
+    void deveRegistrarAvaliacao() {
+
+        ReservaTable reservaTableMock = mock(ReservaTable.class);
+        Avaliacao avaliacaoMock = mock(Avaliacao.class);
+        AvaliacaoTable avaliacaoTableMock = mock(AvaliacaoTable.class);
+        IAvaliacaoRepository repositoryMock = mock(IAvaliacaoRepository.class);
+        AvaliacaoService avaliacaoService = new AvaliacaoService(repositoryMock, reservaService);
+
+
+        when(reservaService.buscarReservaTablePorId(avaliacaoMock.getReservaId())).thenReturn(Optional.of(reservaTableMock));
+
+
+        when(repositoryMock.save(any(AvaliacaoTable.class))).thenReturn(avaliacaoTableMock);
+
+
+        when(avaliacaoTableMock.ToDomainEntity()).thenReturn(avaliacaoMock);
+
+
+        Avaliacao avaliacaoRegistrada = avaliacaoService.registrar(avaliacaoMock);
+
+
+        assertThat(avaliacaoRegistrada).isNotNull();
+        verify(repositoryMock, times(1)).save(any(AvaliacaoTable.class));
+    }
 
 }
