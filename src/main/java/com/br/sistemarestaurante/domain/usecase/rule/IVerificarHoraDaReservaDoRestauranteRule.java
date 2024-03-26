@@ -21,13 +21,13 @@ public interface IVerificarHoraDaReservaDoRestauranteRule {
 
     private static void validarHoraEDataAtual(Calendar date, LocalTime hora) throws SystemException {
         Calendar today = IVerificarDataDaReservaRule.resetarHora(Calendar.getInstance());
-        final LocalTime now = LocalTime.from(ZonedDateTime.now());
+        final LocalTime now = getCurrentDate();
         if (!date.equals(today)) {
             return;
         }
 
         if (hora.isBefore(now)) {
-            throw new HorarioNoPassadoException(hora.toString());
+            throw new HorarioNoPassadoException(hora);
         }
     }
 
@@ -48,5 +48,7 @@ public interface IVerificarHoraDaReservaDoRestauranteRule {
         }
     }
 
-
+    static LocalTime getCurrentDate(){
+        return LocalTime.from(ZonedDateTime.now());
+    }
 }
