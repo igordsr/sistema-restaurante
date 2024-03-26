@@ -4,7 +4,7 @@ import com.br.sistemarestaurante.domain.entity.Cliente;
 import com.br.sistemarestaurante.domain.entity.Reserva;
 import com.br.sistemarestaurante.domain.entity.Restaurante;
 import com.br.sistemarestaurante.domain.entity.StatusReserva;
-import com.br.sistemarestaurante.domain.exception.DataNaoPassadaException;
+import com.br.sistemarestaurante.domain.exception.DataPassadaException;
 import com.br.sistemarestaurante.domain.exception.ReservaNaoDisponivelException;
 import com.br.sistemarestaurante.domain.exception.RestauranteNotFoundException;
 import com.br.sistemarestaurante.domain.exception.SystemException;
@@ -41,7 +41,7 @@ public class ReservaUseCase implements IContractReserva {
     }
 
     @Override
-    public void verificarDataDaReserva(Reserva reserva) throws DataNaoPassadaException {
+    public void verificarDataDaReserva(Reserva reserva) throws DataPassadaException {
         IVerificarDataDaReservaRule.isValid(reserva.getData());
     }
 

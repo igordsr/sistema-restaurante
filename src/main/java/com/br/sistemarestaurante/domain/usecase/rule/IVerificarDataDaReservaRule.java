@@ -1,21 +1,18 @@
 package com.br.sistemarestaurante.domain.usecase.rule;
 
 import com.br.sistemarestaurante.domain.entity.Reserva;
-import com.br.sistemarestaurante.domain.exception.DataNaoPassadaException;
+import com.br.sistemarestaurante.domain.exception.DataPassadaException;
 
 import java.util.Calendar;
 
 public interface IVerificarDataDaReservaRule {
-    void verificarDataDaReserva(Reserva reservas) throws DataNaoPassadaException;
+    void verificarDataDaReserva(Reserva reservas) throws DataPassadaException;
 
-    static boolean isValid(Calendar data) throws DataNaoPassadaException {
-        if (data == null) {
-            return false;
-        }
+    static boolean isValid(Calendar data) throws DataPassadaException {
         resetarHora(data);
         final Calendar dataAtual = resetarHora(Calendar.getInstance());
         if (data.before(dataAtual)) {
-            throw new DataNaoPassadaException();
+            throw new DataPassadaException();
         }
         return true;
     }

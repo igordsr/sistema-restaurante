@@ -57,6 +57,14 @@ public final class Restaurante implements IAttributeValidatorRule<Restaurante> {
         return horarioFechamento;
     }
 
+    public void setHorarioFechamento(LocalTime horarioFechamento) {
+        this.horarioFechamento = horarioFechamento;
+    }
+
+    public void setHorarioAbertura(LocalTime horarioAbertura) {
+        this.horarioAbertura = horarioAbertura;
+    }
+
     public Integer getCapacidade() {
         return capacidade;
     }
