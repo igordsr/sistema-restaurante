@@ -12,6 +12,9 @@ java {
 }
 
 configurations {
+    performanceTestImplementation {
+        extendsFrom testImplementation
+    }
     compileOnly {
         extendsFrom annotationProcessor
     }
@@ -41,6 +44,14 @@ dependencies {
         exclude group: 'org.codehaus.groovy', module: 'groovy'
         exclude group: 'org.codehaus.groovy', module: 'groovy-xml'
     }
+    testImplementation 'io.gatling:gatling-app:3.9.5'
+    testImplementation 'io.gatling.highcharts:gatling-charts-highcharts:3.9.5'
+}
+
+task performanceTest(type: JavaExec, dependsOn: 'classes') {
+    classpath = sourceSets.test.runtimeClasspath + configurations.performanceTestImplementation
+    main = 'io.gatling.app.Gatling'
+    args = ['-s', 'com.br.sistemarestaurante.performance.PerformanceSimulation']
 }
 
 tasks.named('test') {
