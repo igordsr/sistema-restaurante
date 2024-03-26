@@ -1,8 +1,6 @@
 package com.br.sistemarestaurante.bdd;
 
 import com.br.sistemarestaurante.application.dto.AvaliacaoDTO;
-import com.br.sistemarestaurante.application.dto.RestauranteDTO;
-import com.br.sistemarestaurante.domain.entity.Restaurante;
 import io.cucumber.java.pt.Entao;
 import io.cucumber.java.pt.Quando;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -10,7 +8,6 @@ import io.restassured.response.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-import java.time.LocalTime;
 import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
