@@ -8,7 +8,7 @@ public interface IAlterarStatusReservaRule {
 
     Reserva alterarStatusDaReserva(final Reserva reserva);
 
-    static Reserva atualizar(AValidateEntityRole<Reserva> entity, IAlterarStatusReserva repository, Reserva reserva) throws SystemException {
+    static Reserva atualizar(IAlterarStatusReserva repository, Reserva reserva) throws SystemException {
         return repository.aterarStatusDaReserva(reserva);
     }
 

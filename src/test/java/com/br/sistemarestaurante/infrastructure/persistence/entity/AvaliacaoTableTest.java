@@ -9,10 +9,10 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AvaliacaoTableTest {
+class AvaliacaoTableTest {
 
     @Test
-    public void testClassificacao() {
+    void testClassificacao() {
         AvaliacaoTable avaliacaoTable = new AvaliacaoTable();
 
         avaliacaoTable.setClassificacao(4);
@@ -21,7 +21,7 @@ public class AvaliacaoTableTest {
     }
 
     @Test
-    public void testReservaTableAssignment() {
+    void testReservaTableAssignment() {
         ReservaTable reservaTableMock = mock(ReservaTable.class);
 
         AvaliacaoTable avaliacaoTable = new AvaliacaoTable();
@@ -32,7 +32,7 @@ public class AvaliacaoTableTest {
     }
 
     @Test
-    public void testToDomainEntity() {
+    void testToDomainEntity() {
         ReservaTable reservaTableMock = mock(ReservaTable.class);
         UUID reservaId = UUID.randomUUID();
         when(reservaTableMock.getId()).thenReturn(reservaId);
@@ -51,7 +51,7 @@ public class AvaliacaoTableTest {
     }
 
     @Test
-    public void testGetInstance() {
+    void testGetInstance() {
         Avaliacao avaliacao = new Avaliacao(UUID.randomUUID(), UUID.randomUUID(), "Comentario", 4);
 
         AvaliacaoTable avaliacaoTable = AvaliacaoTable.getInstance(avaliacao);

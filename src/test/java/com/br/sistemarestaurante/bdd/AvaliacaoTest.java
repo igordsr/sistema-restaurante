@@ -15,8 +15,6 @@ import static io.restassured.RestAssured.given;
 public class AvaliacaoTest {
 
     private Response response;
-
-
     private String ENDPOINT_API_AVALIACAO = "http://localhost:8080/api/avaliacao";
 
     @Quando("Registrar uma nova Avaliacao")

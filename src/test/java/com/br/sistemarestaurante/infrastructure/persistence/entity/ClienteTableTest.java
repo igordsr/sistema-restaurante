@@ -10,10 +10,10 @@ import java.util.UUID;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
-public class ClienteTableTest {
+class ClienteTableTest {
 
     @Test
-    public void testToDomainEntity() {
+    void testToDomainEntity() {
         ClienteTable clienteTable = new ClienteTable();
         UUID clienteId = UUID.randomUUID();
         clienteTable.setId(clienteId);
@@ -30,7 +30,7 @@ public class ClienteTableTest {
     }
 
     @Test
-    public void testGetInstance() {
+    void testGetInstance() {
         Cliente cliente = new Cliente(UUID.randomUUID(), "Nome do Cliente", "cliente@example.com", "123456789");
 
         ClienteTable clienteTable = ClienteTable.getInstance(cliente);
@@ -41,7 +41,7 @@ public class ClienteTableTest {
     }
 
     @Test
-    public void testOneToManyRelationship() {
+    void testOneToManyRelationship() {
         ReservaTable reserva1 = mock(ReservaTable.class);
         ReservaTable reserva2 = mock(ReservaTable.class);
 

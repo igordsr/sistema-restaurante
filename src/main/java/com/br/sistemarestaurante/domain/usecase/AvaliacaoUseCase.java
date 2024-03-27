@@ -1,7 +1,6 @@
 package com.br.sistemarestaurante.domain.usecase;
 
 import com.br.sistemarestaurante.domain.entity.Avaliacao;
-import com.br.sistemarestaurante.domain.entity.Restaurante;
 import com.br.sistemarestaurante.domain.exception.SystemException;
 import com.br.sistemarestaurante.domain.servicecontracts.IManterAvaliacao;
 import com.br.sistemarestaurante.domain.servicecontracts.businessrule.IBuscarAvaliacao;
@@ -28,7 +27,6 @@ public class AvaliacaoUseCase implements IAvaliacaoContract {
     public Avaliacao validate(IAttributeValidatorRule<Avaliacao> avaliacao) throws SystemException {
         return IAttributeValidatorRule.validar(avaliacao);
     }
-
 
 
     @Override

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Component
 public class AvaliacaoGateway implements IConverterToDTO<AvaliacaoDTO, Avaliacao> {
@@ -29,9 +28,9 @@ public class AvaliacaoGateway implements IConverterToDTO<AvaliacaoDTO, Avaliacao
         return this.toDTO(avaliacao);
     }
 
-    public  List<AvaliacaoDTO>  buscar(UUID reservaId) {
+    public List<AvaliacaoDTO> buscar(UUID reservaId) {
         return new AvaliacaoUseCase(this.repository).buscarAvaliacaoPorReserva(this.repository, reservaId)
-                .stream().map(this::toDTO).collect(Collectors.toList());
+                .stream().map(this::toDTO).toList();
     }
 
     @Override

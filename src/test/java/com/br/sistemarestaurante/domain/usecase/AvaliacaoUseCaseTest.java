@@ -10,11 +10,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-import static org.mockito.ArgumentMatchers.any;
+
 import java.util.List;
 import java.util.UUID;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 class AvaliacaoUseCaseTest {
@@ -25,7 +27,7 @@ class AvaliacaoUseCaseTest {
     private IBuscarAvaliacao buscarAvaliacaoRule;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         repository = mock(IManterAvaliacao.class);
         validatorRule = mock(IAttributeValidatorRule.class);
         buscarAvaliacaoRule = mock(IBuscarAvaliacao.class);
@@ -33,7 +35,7 @@ class AvaliacaoUseCaseTest {
     }
 
     @Test
-    public void testRegistarNoRepositorioDeDados() {
+    void testRegistarNoRepositorioDeDados() {
         Avaliacao avaliacao = new Avaliacao(
                 UUID.randomUUID(),
                 UUID.randomUUID(),
@@ -49,7 +51,7 @@ class AvaliacaoUseCaseTest {
     }
 
     @Test
-    public void testValidate() throws SystemException {
+    void testValidate() throws SystemException {
         Avaliacao avaliacao = new Avaliacao(
                 UUID.randomUUID(),
                 UUID.randomUUID(),
@@ -71,7 +73,7 @@ class AvaliacaoUseCaseTest {
     }
 
     @Test
-    public void testBuscarAvaliacaoPorReserva() {
+    void testBuscarAvaliacaoPorReserva() {
         UUID reservaId = UUID.randomUUID();
         List<Avaliacao> avaliacoes = List.of((new Avaliacao(
                 UUID.randomUUID(),
