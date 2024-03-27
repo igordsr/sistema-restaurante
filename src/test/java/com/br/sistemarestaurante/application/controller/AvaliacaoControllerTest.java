@@ -46,7 +46,7 @@ class AvaliacaoControllerTest {
         UUID uuid = UUID.randomUUID();
         when(avaliacaoGateway.buscar(uuid)).thenReturn(List.of(avaliacaoDTOMock));
 
-        List<AvaliacaoDTO> response = avaliacaoController.buscarPorReserva(uuid);
+        List<AvaliacaoDTO> response = avaliacaoController.buscarPorAvaliacao(uuid);
 
         assertEquals(List.of(avaliacaoDTOMock), response);
         verify(avaliacaoGateway, times(1)).buscar(uuid);
