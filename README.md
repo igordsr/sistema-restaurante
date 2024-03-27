@@ -2,7 +2,7 @@
 
 ### Swagger-Ui
 - AZURE: https://tc-sistema-restaurante.azurewebsites.net/api/swagger-ui/index.html
-- INTEGRATOR: http://sistema.gerenciador.reserva/api/swagger-ui/index.html
+- INTEGRATOR: http://msportfolios.com:4613/api/swagger-ui/index.html
 
 - Para executar a Aplicação:
 ```shell
