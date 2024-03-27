@@ -1,7 +1,8 @@
 # sistema-restaurante
 
 ### Swagger-Ui
-'http://localhost:8080/swagger-ui/index.html#/'
+- AZURE: https://tc-sistema-restaurante.azurewebsites.net/api/swagger-ui/index.html
+- INTEGRATOR: http://sistema.gerenciador.reserva/api/swagger-ui/index.html
 
 - Para executar a Aplicação:
 ```shell
