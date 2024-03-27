@@ -8,9 +8,9 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ClienteTest {
+class ClienteTest {
     @Test
-    public void testValidate_ValidCliente_ShouldNotThrowException() {
+    void testValidate_ValidCliente_ShouldNotThrowException() {
         UUID identificador = UUID.randomUUID();
         String nome = "Fulano";
         String email = "fulano@example.com";
@@ -22,7 +22,7 @@ public class ClienteTest {
     }
 
     @Test
-    public void testValidate_NullNome_ShouldThrowSystemException() {
+    void testValidate_NullNome_ShouldThrowSystemException() {
         UUID identificador = UUID.randomUUID();
         String nome = null;
         String email = "fulano@example.com";

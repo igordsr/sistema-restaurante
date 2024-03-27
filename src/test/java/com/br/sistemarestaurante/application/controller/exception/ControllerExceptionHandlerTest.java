@@ -18,9 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ControllerExceptionHandlerTest {
+class ControllerExceptionHandlerTest {
     @Test
-    public void testValidation() {
+    void testValidation() {
         ControllerExceptionHandler handler = new ControllerExceptionHandler();
         MethodArgumentNotValidException exception = mock(MethodArgumentNotValidException.class);
         HttpServletRequest request = mock(HttpServletRequest.class);
@@ -42,7 +42,7 @@ public class ControllerExceptionHandlerTest {
     }
 
     @Test
-    public void testInvalidBusinessRules() {
+    void testInvalidBusinessRules() {
         ControllerExceptionHandler handler = new ControllerExceptionHandler();
         SystemException exception = new SystemException("Erro de regra de negócio");
         HttpServletRequest request = mock(HttpServletRequest.class);
@@ -57,7 +57,7 @@ public class ControllerExceptionHandlerTest {
     }
 
     @Test
-    public void testDataIntegrityViolationException() {
+    void testDataIntegrityViolationException() {
         ControllerExceptionHandler handler = new ControllerExceptionHandler();
         DataIntegrityViolationException exception = new DataIntegrityViolationException("Mensagem de erro");
         WebRequest request = mock(WebRequest.class);

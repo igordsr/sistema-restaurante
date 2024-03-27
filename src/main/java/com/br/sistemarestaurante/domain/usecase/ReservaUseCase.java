@@ -67,7 +67,7 @@ public class ReservaUseCase implements IContractReserva {
 
     @Override
     public Reserva alterarStatusDaReserva(Reserva reserva) throws SystemException {
-        return IAlterarStatusReservaRule.atualizar(this, this.reservaRepository, reserva);
+        return IAlterarStatusReservaRule.atualizar(this.reservaRepository, reserva);
     }
 
     @Override

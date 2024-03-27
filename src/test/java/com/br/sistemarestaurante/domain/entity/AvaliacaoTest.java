@@ -7,10 +7,11 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-public class AvaliacaoTest {
+
+class AvaliacaoTest {
 
     @Test
-    public void testValidate_ValidAvaliacao_ShouldNotThrowException() {
+    void testValidate_ValidAvaliacao_ShouldNotThrowException() {
         UUID identificador = UUID.randomUUID();
         UUID reservaId = UUID.randomUUID();
         String comentario = "Bom serviço!";
@@ -22,7 +23,7 @@ public class AvaliacaoTest {
     }
 
     @Test
-    public void testValidate_NullReservaId_ShouldThrowSystemException() {
+    void testValidate_NullReservaId_ShouldThrowSystemException() {
         UUID identificador = UUID.randomUUID();
         UUID reservaId = null;
         String comentario = "Bom serviço!";

@@ -14,12 +14,12 @@ import org.springframework.web.context.request.WebRequest;
 import java.time.Instant;
 
 @ControllerAdvice
-public class ControllerExceptionHandler {
+class ControllerExceptionHandler {
     private StardardError stardardError = new StardardError();
 
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<StardardError> validation(MethodArgumentNotValidException err, HttpServletRequest httpServletRequest) {
+    ResponseEntity<StardardError> validation(MethodArgumentNotValidException err, HttpServletRequest httpServletRequest) {
         HttpStatus code = HttpStatus.BAD_REQUEST;
         ValidateError validateError = new ValidateError();
         validateError.setTimestamp(Instant.now());
@@ -35,7 +35,7 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(SystemException.class)
-    public ResponseEntity<StardardError> InvalidBusinessRules(SystemException err, HttpServletRequest httpServletRequest) {
+    ResponseEntity<StardardError> InvalidBusinessRules(SystemException err, HttpServletRequest httpServletRequest) {
         HttpStatus code = HttpStatus.BAD_REQUEST;
         stardardError.setTimestamp(Instant.now());
         stardardError.setStatus(code.value());
@@ -46,7 +46,7 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<StardardError> handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
+    ResponseEntity<StardardError> handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         String errorMessage = "Ocorreu um erro ao processar a solicitação.";
 

@@ -1,10 +1,9 @@
 package com.br.sistemarestaurante.application.gateway;
 
 import com.br.sistemarestaurante.application.dto.AvaliacaoDTO;
+import com.br.sistemarestaurante.application.util.IConverterToDomainEntity;
 import com.br.sistemarestaurante.domain.entity.Avaliacao;
 import com.br.sistemarestaurante.infrastructure.persistence.service.AvaliacaoService;
-import com.br.sistemarestaurante.application.gateway.AvaliacaoGateway;
-import com.br.sistemarestaurante.application.util.IConverterToDomainEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -19,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class AvaliacaoGatewayTest {
+class AvaliacaoGatewayTest {
 
     @Mock
     private AvaliacaoService avaliacaoServiceMock;
@@ -33,7 +32,7 @@ public class AvaliacaoGatewayTest {
     }
 
     @Test
-    public void testRegistrarAvaliacao() {
+    void testRegistrarAvaliacao() {
         Avaliacao avaliacao = new Avaliacao(UUID.randomUUID(), UUID.randomUUID(), "Comentario teste", 5);
         IConverterToDomainEntity<Avaliacao> obj = () -> avaliacao;
 
@@ -50,7 +49,7 @@ public class AvaliacaoGatewayTest {
     }
 
     @Test
-    public void testBuscarAvaliacoesPorReserva() {
+    void testBuscarAvaliacoesPorReserva() {
         UUID reservaId = UUID.randomUUID();
         Avaliacao avaliacao = new Avaliacao(UUID.randomUUID(), reservaId, "Comentario teste", 5);
         List<Avaliacao> avaliacoes = Collections.singletonList(avaliacao);

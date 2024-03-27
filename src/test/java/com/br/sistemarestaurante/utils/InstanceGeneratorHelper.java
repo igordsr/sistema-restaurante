@@ -1,5 +1,6 @@
 package com.br.sistemarestaurante.utils;
 
+import com.br.sistemarestaurante.application.dto.ReservaDTO;
 import com.br.sistemarestaurante.domain.entity.Cliente;
 import com.br.sistemarestaurante.domain.entity.Reserva;
 import com.br.sistemarestaurante.domain.entity.Restaurante;
@@ -37,5 +38,19 @@ public class InstanceGeneratorHelper {
                 gerarCliente(),
                 futureDate,
                 LocalTime.of(11, 30, 5));
+    }
+
+
+    public static ReservaDTO ReservaToDTO(Reserva reserva) {
+        return new ReservaDTO(
+                reserva.getIdentificador(),
+                reserva.getRestauranteId(),
+                reserva.getCliente().getNome(),
+                reserva.getCliente().getEmail(),
+                reserva.getCliente().getTelefone(),
+                reserva.getData(),
+                reserva.getHora(),
+                reserva.getStatus()
+        );
     }
 }
