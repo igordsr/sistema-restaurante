@@ -21,7 +21,7 @@ public class StepDefinition {
 
     private Restaurante restaurante;
 
-    private String ENDPOINT_API_RESTAURANTE = "http://localhost:8080/restaurante";
+    private String ENDPOINT_API_RESTAURANTE = "http://localhost:8080/api/restaurante";
 
     @Quando("Registrar um novo Restaurante")
     public void registrar_um_novo_restaurante() {

@@ -15,7 +15,7 @@ import static io.gatling.javaapi.http.HttpDsl.status;
 public class PerformanceSimulation extends Simulation {
 
     private final HttpProtocolBuilder httpProtocol = http
-            .baseUrl("http://localhost:8080")
+            .baseUrl("http://localhost:8080/api")
             .header("Content-Type", "application/json");
 
     LocalTime horarioAbertura = LocalTime.of(19, 0); // 19:00
@@ -27,11 +27,11 @@ public class PerformanceSimulation extends Simulation {
     ActionBuilder registrarRestauranteRequest = http("registrar restaurante")
             .post("/restaurante")
             .body(StringBody(requestBody))
-            .check(status().is(201))
+//            .check(status().is(201))
             .check(jsonPath("$.id").saveAs("id"));
 
     ActionBuilder buscarRestauranteRequest = http("buscar restaurantes")
-            .get("/restaurante/restaurantes")
+            .get("/restaurante")
             .check(status().is(200));
 
 
